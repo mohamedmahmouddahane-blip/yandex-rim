@@ -1,0 +1,3655 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Yandex Rim | Fast & Secure Money Transfers</title>
+    <script src="https://unpkg.com/lightweight-charts@4.1.0/dist/lightweight-charts.standalone.js">
+    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script type="text/javascript" src="https://s3.tradingview.com/tv.js">
+    </script>
+    <style>
+        /* ----- RESET & BASE ----- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif;
+            background: #f4f7fc;
+            color: #1a2c3e;
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        body.rtl {
+            direction: rtl;
+            text-align: right;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        /* ----- HEADER ----- */
+        .brand-header {
+            background: #ffffff;
+            border-radius: 40px;
+            padding: 24px 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            border: 1px solid rgba(252, 63, 29, 0.08);
+        }
+
+        .brand-left {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+        }
+
+        .brand-logo {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #FC3F1D, #E62E10);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 8px 20px rgba(252, 63, 29, 0.25);
+        }
+
+        .brand-logo i {
+            font-size: 2.2rem;
+            color: #fff;
+        }
+
+        .brand-name {
+            font-size: 1.8rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #FC3F1D, #E62E10, #1a3a5e);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -0.5px;
+        }
+
+        .brand-sub {
+            font-size: 0.75rem;
+            color: #5f7f9e;
+            margin-top: 2px;
+        }
+
+        .brand-right {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            flex-wrap: wrap;
+        }
+
+        .lang-btn {
+            background: transparent;
+            border: none;
+            padding: 6px 14px;
+            border-radius: 30px;
+            font-weight: 500;
+            font-size: 0.75rem;
+            color: #4a627a;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .lang-btn.active {
+            background: #FC3F1D;
+            color: #fff;
+        }
+
+        .lang-btn i {
+            margin-right: 4px;
+        }
+
+        body.rtl .lang-btn i {
+            margin-left: 4px;
+            margin-right: 0;
+        }
+
+        .support-badge {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: #f0f5fe;
+            padding: 6px 18px;
+            border-radius: 40px;
+            font-size: 0.8rem;
+        }
+
+        .support-badge a {
+            color: #1a2c3e;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .support-badge a:hover {
+            color: #FC3F1D;
+        }
+
+        .support-badge i {
+            color: #FC3F1D;
+        }
+
+        /* ----- HERO ----- */
+        .hero-banner {
+            background: linear-gradient(135deg, #ffffff 0%, #f8faff 100%);
+            border-radius: 32px;
+            padding: 28px 35px;
+            margin-bottom: 30px;
+            box-shadow: 0 6px 24px rgba(0, 0, 0, 0.03);
+            border: 1px solid rgba(252, 63, 29, 0.06);
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .hero-text {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .hero-text i {
+            font-size: 1.8rem;
+            color: #FC3F1D;
+        }
+
+        .hero-text h1 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #1a2c3e;
+        }
+
+        .hero-text h1 span {
+            background: linear-gradient(135deg, #FC3F1D, #E62E10);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-badge {
+            background: linear-gradient(115deg, #1a5a3e, #0f4a33);
+            padding: 10px 28px;
+            border-radius: 60px;
+            color: #fff;
+            font-weight: 600;
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            box-shadow: 0 8px 20px rgba(26, 90, 62, 0.2);
+        }
+
+        .hero-badge i {
+            font-size: 1.3rem;
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0%,
+            100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.1);
+            }
+        }
+
+        /* ----- STEP AUTH ----- */
+        .step-container {
+            background: #fff;
+            border-radius: 32px;
+            box-shadow: 0 6px 24px rgba(0, 0, 0, 0.04);
+            overflow: hidden;
+            margin-bottom: 30px;
+        }
+
+        .step-tabs {
+            display: flex;
+            background: #f8fafd;
+            border-bottom: 1px solid #eef2fa;
+        }
+
+        .step-tab {
+            flex: 1;
+            text-align: center;
+            padding: 16px 10px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            color: #4a627a;
+            cursor: pointer;
+            transition: 0.2s;
+            border-bottom: 3px solid transparent;
+        }
+
+        .step-tab.active {
+            background: #fff;
+            color: #FC3F1D;
+            border-bottom-color: #FC3F1D;
+        }
+
+        .step-tab.completed {
+            color: #2ecc71;
+        }
+
+        .step-tab i {
+            margin-right: 8px;
+        }
+
+        body.rtl .step-tab i {
+            margin-left: 8px;
+            margin-right: 0;
+        }
+
+        .step-content {
+            padding: 28px 32px;
+            display: none;
+        }
+
+        .step-content.active {
+            display: block;
+        }
+
+        .step-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: #1a2c3e;
+        }
+
+        .reg-field {
+            margin-bottom: 18px;
+        }
+
+        .reg-field label {
+            font-weight: 600;
+            display: block;
+            margin-bottom: 6px;
+            color: #1a2c3e;
+            font-size: 0.9rem;
+        }
+
+        .reg-field input,
+        .reg-field select {
+            width: 100%;
+            padding: 12px 18px;
+            border-radius: 40px;
+            border: 1.5px solid #dce5f2;
+            font-size: 1rem;
+            transition: 0.2s;
+            background: #fafcff;
+        }
+
+        .reg-field input:focus,
+        .reg-field select:focus {
+            outline: none;
+            border-color: #FC3F1D;
+            box-shadow: 0 0 0 4px rgba(252, 63, 29, 0.08);
+        }
+
+        .reg-btn {
+            background: linear-gradient(100deg, #FC3F1D, #E62E10);
+            border: none;
+            padding: 14px 32px;
+            border-radius: 48px;
+            color: #fff;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            width: 100%;
+            font-size: 1rem;
+            transition: 0.2s;
+        }
+
+        .reg-btn:hover {
+            transform: translateY(-2px);
+            opacity: 0.92;
+        }
+
+        .switch-step-link {
+            text-align: center;
+            margin-top: 18px;
+            font-size: 0.9rem;
+        }
+
+        .switch-step-link a {
+            color: #FC3F1D;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .warning-message {
+            background: #fff3cd;
+            border-radius: 20px;
+            padding: 14px 20px;
+            margin-bottom: 20px;
+            color: #856404;
+            font-size: 0.9rem;
+        }
+
+        .error-message {
+            color: #e74c3c;
+            font-size: 0.8rem;
+            margin-top: 6px;
+            text-align: center;
+        }
+        .success-message {
+            color: #2ecc71;
+            font-size: 0.8rem;
+            margin-top: 6px;
+            text-align: center;
+        }
+
+        .verification-section {
+            background: #fef9e6;
+            border: 2px solid #e67e22;
+            border-radius: 24px;
+            padding: 20px;
+            margin-top: 16px;
+        }
+
+        .code-input-group {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-top: 12px;
+        }
+
+        .code-input-group input {
+            flex: 1;
+            padding: 12px 18px;
+            border-radius: 40px;
+            border: 1px solid #cbdde9;
+            text-align: center;
+            letter-spacing: 4px;
+            font-size: 1.1rem;
+        }
+
+        /* ----- USER BAR ----- */
+        .user-bar {
+            background: #e8f5e9;
+            border-radius: 30px;
+            padding: 12px 24px;
+            display: none;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 30px;
+        }
+
+        .user-bar.show {
+            display: flex;
+        }
+
+        .user-bar .user-info {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            flex-wrap: wrap;
+        }
+
+        .admin-badge {
+            background: #2ecc71;
+            color: #fff;
+            padding: 2px 14px;
+            border-radius: 30px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            display: none;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .admin-badge.show {
+            display: inline-flex;
+        }
+
+        .logout-btn {
+            background: #95a5a6;
+            border: none;
+            padding: 6px 20px;
+            border-radius: 40px;
+            color: #fff;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 0.85rem;
+            transition: 0.2s;
+        }
+
+        .logout-btn:hover {
+            background: #7f8c8d;
+        }
+
+        /* ----- DASHBOARD GRID ----- */
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 28px;
+            margin-bottom: 30px;
+            display: none;
+        }
+
+        .dashboard-grid.show {
+            display: grid;
+        }
+
+        .full-width {
+            grid-column: span 2;
+        }
+
+        .card {
+            background: #ffffff;
+            border-radius: 28px;
+            box-shadow: 0 6px 24px rgba(0, 0, 0, 0.04);
+            overflow: hidden;
+            border: 1px solid rgba(0, 0, 0, 0.03);
+            transition: 0.2s;
+        }
+
+        .card:hover {
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.06);
+        }
+
+        .card-header {
+            padding: 18px 24px;
+            border-bottom: 1px solid #eef2fa;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .card-header h2 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .card-header h2 i {
+            color: #FC3F1D;
+        }
+
+        .card-body {
+            padding: 22px 24px;
+        }
+
+        /* ----- RATE BANNER ----- */
+        .rate-banner {
+            background: linear-gradient(115deg, #1a5a3e, #0f4a33);
+            border-radius: 40px;
+            padding: 16px 24px;
+            text-align: center;
+            color: #fff;
+            margin-bottom: 20px;
+        }
+
+        .rate-banner .live-badge {
+            background: #f39c12;
+            padding: 2px 14px;
+            border-radius: 40px;
+            font-size: 0.65rem;
+            font-weight: 700;
+            display: inline-block;
+            margin-right: 10px;
+            animation: blink 1s infinite;
+        }
+
+        body.rtl .rate-banner .live-badge {
+            margin-left: 10px;
+            margin-right: 0;
+        }
+
+        @keyframes blink {
+            0%,
+            100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.5;
+            }
+        }
+
+        .rate-banner .rate-number {
+            font-size: 1.8rem;
+            font-weight: 800;
+        }
+
+        .rate-sub {
+            font-size: 0.8rem;
+            opacity: 0.8;
+            margin-top: 4px;
+        }
+
+        /* ----- CHART WRAPPER ----- */
+        .chart-wrapper {
+            width: 100%;
+            height: 380px;
+            border-radius: 16px;
+            overflow: hidden;
+            background: #fafcff;
+            position: relative;
+        }
+
+        .chart-wrapper iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .chart-hint {
+            font-size: 0.7rem;
+            color: #7f8c8d;
+            text-align: center;
+            margin-top: 10px;
+            background: #f0f5fe;
+            padding: 6px 14px;
+            border-radius: 30px;
+            display: inline-block;
+        }
+
+        /* ----- RATE DISPLAY ----- */
+        .rate-display-box {
+            background: #f8faff;
+            border-radius: 24px;
+            padding: 24px 30px;
+            text-align: center;
+            border: 2px solid #eef2fa;
+            transition: 0.2s;
+        }
+
+        .rate-display-box:hover {
+            border-color: #FC3F1D;
+        }
+
+        .rate-display-box .big-rate {
+            font-size: 2.8rem;
+            font-weight: 800;
+            color: #1a2c3e;
+            margin: 8px 0;
+        }
+
+        .rate-display-box .big-rate span {
+            color: #FC3F1D;
+        }
+
+        .rate-display-box .rate-detail {
+            font-size: 0.95rem;
+            color: #5e7e9e;
+            margin-top: 6px;
+        }
+
+        .rate-display-box .rate-detail i {
+            color: #FC3F1D;
+            margin-right: 6px;
+        }
+
+        body.rtl .rate-display-box .rate-detail i {
+            margin-left: 6px;
+            margin-right: 0;
+        }
+
+        .rate-display-box .update-time {
+            font-size: 0.7rem;
+            color: #95a5a6;
+            margin-top: 10px;
+        }
+
+        /* ----- CALCULATOR ----- */
+        .calc-card {
+            background: #f8fafd;
+            border-radius: 24px;
+            padding: 20px;
+            border: 1px solid #eef2fa;
+        }
+
+        .direction-switch {
+            display: flex;
+            gap: 8px;
+            background: #eef2fa;
+            border-radius: 60px;
+            padding: 4px;
+            margin-bottom: 18px;
+        }
+
+        .dir-btn {
+            flex: 1;
+            text-align: center;
+            padding: 10px;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            background: transparent;
+            color: #4a627a;
+            transition: 0.2s;
+        }
+
+        .dir-btn.active {
+            background: #FC3F1D;
+            color: #fff;
+        }
+
+        .calc-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 14px;
+            margin: 14px 0;
+            align-items: flex-end;
+        }
+
+        .calc-field {
+            flex: 1;
+            min-width: 140px;
+        }
+
+        .calc-field label {
+            font-size: 0.8rem;
+            font-weight: 600;
+            display: block;
+            margin-bottom: 4px;
+            color: #1a2c3e;
+        }
+
+        .calc-field input,
+        .calc-field select {
+            width: 100%;
+            padding: 10px 16px;
+            border-radius: 32px;
+            border: 1px solid #dce5f2;
+            background: #fff;
+            font-size: 0.95rem;
+        }
+
+        .calc-result {
+            background: #e9f0f9;
+            border-radius: 32px;
+            padding: 12px 20px;
+            font-weight: 600;
+            text-align: center;
+            margin-top: 12px;
+        }
+
+        .fee-note {
+            font-size: 0.7rem;
+            color: #5e7e9e;
+            text-align: center;
+            margin-top: 12px;
+        }
+
+        .recipient-section {
+            background: #fef9e6;
+            border: 2px solid #e67e22;
+            border-radius: 24px;
+            padding: 18px;
+            margin-top: 18px;
+        }
+
+        .fee-alert {
+            background: #ffe6e6;
+            border-left: 4px solid #e74c3c;
+            padding: 10px 16px;
+            border-radius: 12px;
+            color: #c0392b;
+            font-weight: 600;
+            margin-top: 14px;
+            font-size: 0.9rem;
+        }
+
+        body.rtl .fee-alert {
+            border-right: 4px solid #e74c3c;
+            border-left: none;
+        }
+
+        .btn-primary {
+            background: #FC3F1D;
+            color: #fff;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 40px;
+            font-weight: 700;
+            cursor: pointer;
+            width: 100%;
+            transition: 0.2s;
+            font-size: 1rem;
+            margin-top: 14px;
+        }
+
+        .btn-primary:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
+        }
+
+        /* ----- GALLERY ----- */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+            gap: 16px;
+            margin-top: 14px;
+            max-height: 420px;
+            overflow-y: auto;
+            padding: 4px;
+        }
+
+        .gallery-item {
+            background: #fafcff;
+            border-radius: 18px;
+            overflow: hidden;
+            border: 1px solid #eef2fa;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 120px;
+            object-fit: cover;
+            display: block;
+            cursor: pointer;
+        }
+
+        .gallery-item .caption {
+            padding: 8px;
+            font-size: 0.65rem;
+            text-align: center;
+            background: #fff;
+            font-weight: 500;
+        }
+
+        .gallery-actions {
+            display: flex;
+            gap: 6px;
+            padding: 6px 10px 10px;
+            flex-wrap: wrap;
+            background: #f9fbfe;
+            border-top: 1px solid #eef2fa;
+        }
+
+        .gallery-actions button {
+            border: none;
+            padding: 3px 10px;
+            border-radius: 30px;
+            font-size: 0.6rem;
+            font-weight: 600;
+            cursor: pointer;
+            color: #fff;
+        }
+
+        .validate-btn {
+            background: #2ecc71;
+        }
+        .reject-btn {
+            background: #e74c3c;
+        }
+        .delete-btn {
+            background: #95a5a6;
+        }
+        .admin-action-btn {
+            background: #3498db;
+            color: #fff;
+            border: none;
+            padding: 3px 10px;
+            border-radius: 30px;
+            font-size: 0.6rem;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        .delete-icon-btn {
+            background: #e74c3c;
+            color: #fff;
+            border: none;
+            padding: 2px 10px;
+            border-radius: 30px;
+            font-size: 0.6rem;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .upload-container {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .upload-btn {
+            background: #FC3F1D;
+            color: #fff;
+            border: none;
+            padding: 6px 18px;
+            border-radius: 32px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.8rem;
+            transition: 0.2s;
+        }
+
+        .upload-btn:hover {
+            opacity: 0.9;
+            transform: scale(1.02);
+        }
+
+        .file-input-label {
+            background: #FC3F1D20;
+            border: 2px dashed #FC3F1D;
+            border-radius: 32px;
+            padding: 6px 18px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            color: #FC3F1D;
+            font-weight: 600;
+            transition: 0.2s;
+        }
+
+        .file-input-label:hover {
+            background: #FC3F1D30;
+        }
+
+        /* ----- MY PAYMENTS ----- */
+        .my-payments-list {
+            max-height: 320px;
+            overflow-y: auto;
+        }
+
+        .payment-item {
+            padding: 14px 16px;
+            border-radius: 16px;
+            background: #f8fbff;
+            border: 1px solid #e6eef8;
+            margin-top: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            border-left: 4px solid #95a5a6;
+        }
+
+        body.rtl .payment-item {
+            border-right: 4px solid #95a5a6;
+            border-left: none;
+        }
+
+        .payment-item.status-approved {
+            border-left-color: #2ecc71;
+        }
+        .payment-item.status-rejected {
+            border-left-color: #e74c3c;
+            opacity: 0.75;
+        }
+        .payment-item.status-pending {
+            border-left-color: #f39c12;
+        }
+
+        body.rtl .payment-item.status-approved {
+            border-right-color: #2ecc71;
+            border-left: none;
+        }
+        body.rtl .payment-item.status-rejected {
+            border-right-color: #e74c3c;
+            border-left: none;
+        }
+        body.rtl .payment-item.status-pending {
+            border-right-color: #f39c12;
+            border-left: none;
+        }
+
+        .payment-meta {
+            font-size: 0.75rem;
+            color: #5e7e9e;
+        }
+
+        .my-payment-status {
+            font-weight: 700;
+            padding: 2px 14px;
+            border-radius: 30px;
+            font-size: 0.7rem;
+            display: inline-block;
+        }
+
+        .my-payment-status.pending {
+            background: #f39c12;
+            color: #000;
+        }
+        .my-payment-status.approved {
+            background: #2ecc71;
+            color: #fff;
+        }
+        .my-payment-status.rejected {
+            background: #e74c3c;
+            color: #fff;
+        }
+
+        .payment-status {
+            padding: 2px 14px;
+            border-radius: 30px;
+            font-size: 0.65rem;
+            font-weight: 700;
+        }
+        .status-pending {
+            background: #f39c12;
+            color: #000;
+        }
+        .status-approved {
+            background: #2ecc71;
+            color: #fff;
+        }
+        .status-rejected {
+            background: #e74c3c;
+            color: #fff;
+        }
+
+        /* ----- NEWS ----- */
+        .news-feed {
+            max-height: 460px;
+            overflow-y: auto;
+            padding: 4px;
+        }
+
+        .news-card {
+            background: #fff;
+            border-radius: 18px;
+            padding: 16px 20px;
+            margin-bottom: 14px;
+            border-left: 4px solid #FC3F1D;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.03);
+            transition: 0.2s;
+        }
+
+        body.rtl .news-card {
+            border-right: 4px solid #FC3F1D;
+            border-left: none;
+        }
+
+        .news-card:hover {
+            transform: translateX(4px);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+        }
+
+        body.rtl .news-card:hover {
+            transform: translateX(-4px);
+        }
+
+        .news-card.exchange {
+            border-left-color: #3498db;
+        }
+        .news-card.economy {
+            border-left-color: #2ecc71;
+        }
+        .news-card.announcement {
+            border-left-color: #e67e22;
+        }
+        .news-card.security {
+            border-left-color: #e74c3c;
+        }
+
+        body.rtl .news-card.exchange {
+            border-right-color: #3498db;
+            border-left: none;
+        }
+        body.rtl .news-card.economy {
+            border-right-color: #2ecc71;
+            border-left: none;
+        }
+        body.rtl .news-card.announcement {
+            border-right-color: #e67e22;
+            border-left: none;
+        }
+        body.rtl .news-card.security {
+            border-right-color: #e74c3c;
+            border-left: none;
+        }
+
+        .news-card .news-title {
+            font-weight: 700;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .news-card .news-meta {
+            font-size: 0.7rem;
+            color: #7f8c8d;
+            margin: 4px 0 8px;
+            display: flex;
+            gap: 14px;
+            flex-wrap: wrap;
+        }
+
+        .news-card .news-meta .category {
+            background: #FC3F1D10;
+            color: #FC3F1D;
+            padding: 0 12px;
+            border-radius: 30px;
+            font-weight: 600;
+        }
+
+        .news-card .news-content {
+            font-size: 0.9rem;
+            color: #2c3e50;
+            line-height: 1.5;
+        }
+
+        .news-card .news-actions {
+            display: flex;
+            gap: 6px;
+            margin-top: 8px;
+            flex-wrap: wrap;
+        }
+
+        .news-card .news-actions button {
+            border: none;
+            padding: 2px 14px;
+            border-radius: 30px;
+            font-size: 0.6rem;
+            font-weight: 600;
+            cursor: pointer;
+            color: #fff;
+        }
+
+        .btn-approve {
+            background: #2ecc71;
+        }
+        .btn-reject {
+            background: #e74c3c;
+        }
+        .btn-delete {
+            background: #e74c3c;
+        }
+
+        .news-publish-form {
+            background: #f8faff;
+            border-radius: 24px;
+            padding: 18px 20px;
+            margin-top: 18px;
+            border: 1px solid #eef2fa;
+            display: none;
+            flex-wrap: wrap;
+            gap: 12px;
+            align-items: center;
+        }
+
+        .news-publish-form.visible {
+            display: flex;
+        }
+
+        .news-publish-form input,
+        .news-publish-form select,
+        .news-publish-form textarea {
+            border: 1px solid #dce5f2;
+            border-radius: 40px;
+            padding: 8px 16px;
+            font-size: 0.9rem;
+            background: #fff;
+            flex: 1;
+            min-width: 140px;
+        }
+
+        .news-publish-form textarea {
+            border-radius: 20px;
+            resize: vertical;
+        }
+
+        .news-publish-form .publish-btn {
+            background: linear-gradient(135deg, #FC3F1D, #E62E10);
+            color: #fff;
+            border: none;
+            padding: 8px 28px;
+            border-radius: 40px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .news-publish-form .publish-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(252, 63, 29, 0.25);
+        }
+
+        .news-publish-form .user-label {
+            font-size: 0.8rem;
+            color: #5f7f9e;
+            background: #fff;
+            padding: 4px 16px;
+            border-radius: 30px;
+            border: 1px dashed #cbdde9;
+            white-space: nowrap;
+        }
+
+        /* ----- ADMIN PANEL ----- */
+        .admin-panel {
+            background: #eef3fc;
+            border-radius: 28px;
+            padding: 24px;
+            margin-top: 30px;
+            display: none;
+        }
+
+        .admin-panel.visible {
+            display: block;
+        }
+
+        .admin-box {
+            background: #fff;
+            border-radius: 20px;
+            padding: 16px 20px;
+            margin-top: 16px;
+            border: 1px solid #dde7f3;
+        }
+
+        .admin-control-buttons {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-top: 12px;
+        }
+
+        .admin-control-buttons button {
+            border: none;
+            padding: 6px 18px;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 0.8rem;
+            cursor: pointer;
+            color: #fff;
+        }
+
+        .admin-action-btn {
+            background: #3498db;
+        }
+        .admin-action-btn.danger {
+            background: #e74c3c;
+        }
+        .admin-action-btn.success {
+            background: #2ecc71;
+        }
+
+        .admin-publish-notice {
+            background: #e8f0fe;
+            border-radius: 16px;
+            padding: 12px 20px;
+            margin-top: 16px;
+            text-align: center;
+            color: #1a4a6e;
+            font-size: 0.9rem;
+            border: 1px dashed #4a8ab5;
+            display: none;
+        }
+
+        .admin-publish-notice.show {
+            display: block;
+        }
+
+        /* ----- MODAL ----- */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal.show {
+            display: flex;
+        }
+
+        .modal-content {
+            background: #fff;
+            border-radius: 32px;
+            padding: 30px;
+            max-width: 460px;
+            width: 92%;
+            text-align: center;
+            animation: slideUp 0.3s ease;
+        }
+
+        @keyframes slideUp {
+            from {
+                transform: translateY(30px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .modal-content .close-modal {
+            float: right;
+            font-size: 28px;
+            cursor: pointer;
+            color: #999;
+            line-height: 1;
+        }
+
+        body.rtl .modal-content .close-modal {
+            float: left;
+        }
+
+        .modal-content .close-modal:hover {
+            color: #333;
+        }
+
+        .modal-content .success-icon {
+            font-size: 4rem;
+            color: #2ecc71;
+            margin: 10px 0;
+        }
+
+        .modal-content .payment-number {
+            background: linear-gradient(135deg, #FC3F1D, #E62E10);
+            padding: 14px;
+            border-radius: 20px;
+            color: #fff;
+            font-weight: 700;
+            font-size: 1.2rem;
+            margin: 16px 0;
+        }
+
+        .modal-content .bank-instruction {
+            background: #f0f5fe;
+            padding: 12px;
+            border-radius: 16px;
+            color: #1a2c3e;
+            font-size: 0.9rem;
+        }
+
+        /* ----- PHOTO ZOOM ----- */
+        .photo-zoom-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.92);
+            z-index: 3000;
+            justify-content: center;
+            align-items: center;
+            cursor: zoom-out;
+        }
+
+        .photo-zoom-modal.show {
+            display: flex;
+        }
+
+        .photo-zoom-modal .zoom-content {
+            max-width: 92%;
+            max-height: 92%;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+        }
+
+        .photo-zoom-modal .zoom-caption {
+            position: absolute;
+            bottom: 30px;
+            left: 0;
+            width: 100%;
+            text-align: center;
+            color: #fff;
+            background: rgba(0, 0, 0, 0.4);
+            padding: 10px;
+            font-size: 0.9rem;
+        }
+
+        .photo-zoom-modal .zoom-close {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: #fff;
+            font-size: 2.5rem;
+            cursor: pointer;
+        }
+
+        body.rtl .photo-zoom-modal .zoom-close {
+            right: auto;
+            left: 30px;
+        }
+
+        /* ----- TOAST ----- */
+        .toast {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            background: #1a2c3e;
+            color: #fff;
+            padding: 12px 28px;
+            border-radius: 50px;
+            z-index: 4000;
+            animation: slideIn 0.3s ease;
+            font-weight: 500;
+            box-shadow: 0 6px 24px rgba(0, 0, 0, 0.15);
+        }
+
+        body.rtl .toast {
+            right: auto;
+            left: 24px;
+        }
+
+        .toast i {
+            margin-right: 8px;
+        }
+
+        body.rtl .toast i {
+            margin-left: 8px;
+            margin-right: 0;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(80px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        body.rtl .toast {
+            animation: slideInRTL 0.3s ease;
+        }
+
+        @keyframes slideInRTL {
+            from {
+                transform: translateX(-80px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        /* ----- FOOTER ----- */
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 16px;
+            font-size: 0.75rem;
+            color: #7f8c8d;
+            border-top: 1px solid #e2e8f0;
+        }
+
+        /* ----- RESPONSIVE ----- */
+        @media (max-width: 880px) {
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+            .full-width {
+                grid-column: span 1;
+            }
+            .brand-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 14px;
+            }
+            .brand-right {
+                width: 100%;
+                justify-content: flex-start;
+            }
+            .hero-banner {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 16px;
+            }
+            .step-tabs {
+                flex-direction: column;
+            }
+            .step-tab {
+                border-bottom: 1px solid #eef2fa;
+            }
+            .step-tab.active {
+                border-bottom: 1px solid #FC3F1D;
+            }
+            .hero-text h1 {
+                font-size: 1.1rem;
+            }
+            .brand-name {
+                font-size: 1.4rem;
+            }
+            .rate-display-box .big-rate {
+                font-size: 2.2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 12px;
+            }
+            .card-header h2 {
+                font-size: 1rem;
+            }
+            .rate-banner .rate-number {
+                font-size: 1.4rem;
+            }
+            .hero-badge {
+                font-size: 0.8rem;
+                padding: 8px 18px;
+            }
+            .rate-display-box .big-rate {
+                font-size: 1.8rem;
+            }
+        }
+
+        /* scrollbar */
+        .gallery-grid::-webkit-scrollbar,
+        .news-feed::-webkit-scrollbar,
+        .my-payments-list::-webkit-scrollbar {
+            width: 5px;
+        }
+        .gallery-grid::-webkit-scrollbar-track,
+        .news-feed::-webkit-scrollbar-track,
+        .my-payments-list::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
+        }
+        .gallery-grid::-webkit-scrollbar-thumb,
+        .news-feed::-webkit-scrollbar-thumb,
+        .my-payments-list::-webkit-scrollbar-thumb {
+            background: #FC3F1D;
+            border-radius: 10px;
+        }
+
+        .security-badge {
+            position: fixed;
+            bottom: 10px;
+            left: 10px;
+            background: rgba(0, 0, 0, 0.7);
+            color: #2ecc71;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.6rem;
+            font-family: monospace;
+            z-index: 999;
+        }
+
+        body.rtl .security-badge {
+            left: auto;
+            right: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+
+        <!-- ===== HEADER ===== -->
+        <header class="brand-header">
+            <div class="brand-left">
+                <div class="brand-logo"><i class="fas fa-crown"></i></div>
+                <div>
+                    <div class="brand-name"><span id="brandName">YANDEX RIM</span></div>
+                    <div class="brand-sub" id="brandSub">Fast &amp; Secure Money Transfers</div>
+                </div>
+            </div>
+            <div class="brand-right">
+                <button class="lang-btn" data-lang="ar"><i class="fas fa-language"></i> عربي</button>
+                <button class="lang-btn" data-lang="fr"><i class="fas fa-language"></i> FR</button>
+                <button class="lang-btn active" data-lang="en"><i class="fas fa-language"></i> EN</button>
+                <div class="support-badge">
+                    <i class="fas fa-envelope"></i>
+                    <a href="mailto:yandexrim@gmail.com">yandexrim@gmail.com</a>
+                    <span style="color:#dce5f2;">|</span>
+                    <i class="fab fa-whatsapp"></i>
+                    <a href="https://wa.me/79164483934" target="_blank">+7 916 448 39 34</a>
+                </div>
+            </div>
+        </header>
+
+        <!-- ===== HERO ===== -->
+        <div class="hero-banner">
+            <div class="hero-text">
+                <i class="fas fa-shield-alt"></i>
+                <h1 id="heroText">We help you make <span>fast and secure transfers</span> in the shortest possible time</h1>
+            </div>
+            <div class="hero-badge">
+                <i class="fas fa-stopwatch"></i>
+                <span id="heroBadgeText">⚡ 1 minute is all you need</span>
+            </div>
+        </div>
+
+        <!-- ===== AUTH STEPS ===== -->
+        <div class="step-container" id="stepContainer">
+            <div class="step-tabs">
+                <div class="step-tab" data-step="1" id="step1Tab"><i class="fas fa-user-plus"></i> <span id="step1Text">Step
+                        1: Create Account</span></div>
+                <div class="step-tab" data-step="2" id="step2Tab"><i class="fas fa-envelope"></i> <span id="step2Text">Step
+                        2: Verify Email</span></div>
+                <div class="step-tab active" data-step="3" id="step3Tab"><i class="fas fa-sign-in-alt"></i> <span
+                        id="step3Text">Step 3: Login</span></div>
+            </div>
+
+            <!-- STEP 1 -->
+            <div class="step-content" id="step1Content">
+                <div class="step-title" id="registerTitle">📝 Create Your Account</div>
+                <div class="warning-message"><i class="fas fa-lock"></i> <span id="newUserWarning">New users: Create an
+                        account to start transferring money</span></div>
+                <div class="reg-field">
+                    <label><i class="fas fa-envelope"></i> <span id="regEmailLabel">Email Address</span></label>
+                    <input type="email" id="regEmail" placeholder="your@email.com">
+                </div>
+                <div class="reg-field">
+                    <label><i class="fas fa-lock"></i> <span id="regPasswordLabel">Password</span></label>
+                    <input type="password" id="regPassword" placeholder="At least 6 characters">
+                </div>
+                <div class="reg-field">
+                    <label><i class="fas fa-check-circle"></i> <span id="regConfirmLabel">Confirm Password</span></label>
+                    <input type="password" id="regConfirmPassword" placeholder="Confirm your password">
+                </div>
+                <div class="reg-field">
+                    <label><i class="fas fa-globe"></i> <span id="regCountryLabel">Country of Residence</span></label>
+                    <select id="regCountry">
+                        <option value="" id="countryDefault">Select your country</option>
+                        <option value="Russia">🇷🇺 Russia</option>
+                        <option value="Mauritania">🇲🇷 Mauritania</option>
+                        <option value="France">🇫🇷 France</option>
+                        <option value="Germany">🇩🇪 Germany</option>
+                        <option value="Spain">🇪🇸 Spain</option>
+                        <option value="Italy">🇮🇹 Italy</option>
+                        <option value="UK">🇬🇧 United Kingdom</option>
+                        <option value="USA">🇺🇸 United States</option>
+                        <option value="Canada">🇨🇦 Canada</option>
+                        <option value="UAE">🇦🇪 UAE</option>
+                        <option value="Egypt">🇪🇬 Egypt</option>
+                        <option value="Morocco">🇲🇦 Morocco</option>
+                        <option value="Tunisia">🇹🇳 Tunisia</option>
+                        <option value="Algeria">🇩🇿 Algeria</option>
+                        <option value="Other">🌍 Other</option>
+                    </select>
+                </div>
+                <button class="reg-btn" id="registerBtn"><i class="fas fa-user-plus"></i> <span
+                        id="registerBtnText">Create my account</span></button>
+                <div id="registerError" class="error-message"></div>
+                <div id="registerSuccess" class="success-message"></div>
+                <div class="switch-step-link"><span id="alreadyHaveAccountText">Already have an account?</span> <a
+                        id="switchToLoginFromReg" style="cursor:pointer;">Login here</a></div>
+            </div>
+
+            <!-- STEP 2 -->
+            <div class="step-content" id="step2Content">
+                <div class="step-title" id="verifyTitle">📧 Verify Your Email</div>
+                <div class="warning-message"><i class="fas fa-envelope"></i> <span id="verifyWarning">A verification code
+                        has been sent to your email address</span></div>
+                <div class="verification-section">
+                    <div class="verification-title" style="font-weight:700;margin-bottom:8px;"><i class="fas fa-key"></i>
+                        <span id="verificationTitle">Enter Verification Code</span></div>
+                    <div class="code-input-group">
+                        <input type="text" id="verificationCode" placeholder="6-digit code" maxlength="6">
+                        <button class="reg-btn" id="verifyCodeBtn" style="width:auto;padding:12px 28px;"><i
+                                class="fas fa-check"></i> <span id="verifyBtnText">Verify</span></button>
+                    </div>
+                    <div class="resend-code" style="text-align:center;margin-top:12px;font-size:0.85rem;">
+                        <span id="resendText">Didn't receive code?</span> <a id="resendCodeLink"
+                            style="color:#FC3F1D;cursor:pointer;font-weight:600;">Resend</a>
+                    </div>
+                    <div id="verifyError" class="error-message"></div>
+                    <div id="verifySuccess" class="success-message"></div>
+                    <div id="demoCodeDisplay"
+                        style="text-align:center;margin-top:14px;padding:10px;background:#f0f5fe;border-radius:12px;border:1px dashed #FC3F1D;display:none;">
+                        <strong style="color:#FC3F1D;" id="demoCodeLabel">📧 Demo Code:</strong>
+                        <span id="demoCodeSpan"
+                            style="font-family:monospace;font-size:1.4rem;font-weight:700;letter-spacing:3px;color:#1a2c3e;"></span>
+                    </div>
+                </div>
+                <div class="switch-step-link"><span id="backToRegisterText">Wrong email?</span> <a
+                        id="backToRegisterLink" style="cursor:pointer;">Go back to registration</a></div>
+            </div>
+
+            <!-- STEP 3 -->
+            <div class="step-content active" id="step3Content">
+                <div class="step-title" id="loginTitle">🔐 Login to Your Account</div>
+                <div class="warning-message"><i class="fas fa-key"></i> <span id="loginWarning">Existing users: Login with
+                        your email and password</span></div>
+                <div class="reg-field">
+                    <label><i class="fas fa-envelope"></i> <span id="loginEmailLabel">Email Address</span></label>
+                    <input type="email" id="loginEmail" placeholder="your@email.com">
+                </div>
+                <div class="reg-field">
+                    <label><i class="fas fa-lock"></i> <span id="loginPasswordLabel">Password</span></label>
+                    <input type="password" id="loginPassword" placeholder="Enter your password">
+                </div>
+                <button class="reg-btn" id="loginBtn"><i class="fas fa-sign-in-alt"></i> <span id="loginBtnText">Login</span></button>
+                <div id="loginError" class="error-message"></div>
+                <div class="switch-step-link"><span id="noAccountText">Don't have an account?</span> <a
+                        id="switchToRegisterFromLogin" style="cursor:pointer;">Create account</a></div>
+            </div>
+        </div>
+
+        <!-- ===== USER BAR ===== -->
+        <div class="user-bar" id="userBar">
+            <div class="user-info">
+                <i class="fas fa-user-circle"></i>
+                <span id="userEmailDisplay"></span>
+                <span style="color:#7f8c8d;">|</span>
+                <i class="fas fa-globe"></i>
+                <span id="userCountryDisplay"></span>
+                <span class="admin-badge" id="adminBadge"><i class="fas fa-crown"></i> <span id="adminBadgeText">Admin</span></span>
+            </div>
+            <button class="logout-btn" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> <span
+                    id="logoutBtnText">Logout</span></button>
+        </div>
+
+        <!-- ===== DASHBOARD ===== -->
+        <div class="dashboard-grid" id="dashboardGrid">
+
+            <!-- CHART 1: TradingView -->
+            <div class="full-width card">
+                <div class="card-header">
+                    <h2><i class="fas fa-chart-line"></i> <span id="tradingViewTitle">Live USD/RUB Chart</span></h2>
+                    <span style="font-size:0.7rem;background:#eef2fa;padding:4px 14px;border-radius:40px;" id="poweredByLabel">Powered by
+                        TradingView</span>
+                </div>
+                <div class="card-body">
+                    <div class="chart-wrapper" id="tradingviewChartWrapper">
+                        <div id="tradingview_chart" style="width:100%;height:100%;"></div>
+                    </div>
+                    <div class="rate-banner" style="margin-top:14px;margin-bottom:0;">
+                        <span class="live-badge"><i class="fas fa-circle"></i> <span id="liveUsdRubLabel">LIVE
+                                USD/RUB</span></span>
+                        <span class="rate-number" id="usdRubRate">1 USD = -- RUB</span>
+                        <div class="rate-sub" id="usdRubUpdate">Loading live rate...</div>
+                    </div>
+                    <div class="chart-hint"><i class="fas fa-info-circle"></i> <span id="chartHintText">Chart interaction
+                            (scroll/zoom) is available for admins only</span></div>
+                </div>
+            </div>
+
+            <!-- CHART 2: USD → MRU Rate Display (no chart) -->
+            <div class="full-width card">
+                <div class="card-header">
+                    <h2><i class="fas fa-chart-simple"></i> <span id="usdToMruTitle">USD → MRU Rate</span></h2>
+                    <span style="font-size:0.7rem;background:#eef2fa;padding:4px 14px;border-radius:40px;" id="derivedLabel">Derived
+                        rate</span>
+                </div>
+                <div class="card-body">
+                    <div class="rate-display-box">
+                        <div style="font-size:0.9rem;color:#5e7e9e;font-weight:600;"><i class="fas fa-info-circle"></i>
+                            <span id="liveMarketLabel">LIVE MARKET RATE</span></div>
+                        <div class="big-rate">1 USD = <span id="liveRateDisplay">--</span> MRU</div>
+                        <div class="rate-detail"><i class="fas fa-arrow-right"></i> 1 RUB = <span
+                                id="rubToMruDetail">--</span> MRU &bull; 1 MRU = <span id="mruToRubDetail">--</span> RUB
+                        </div>
+                        <div class="update-time"><i class="far fa-clock"></i> <span id="updateTimestamp">Fetching market
+                                data...</span></div>
+                    </div>
+                    <p style="font-size:0.7rem;margin-top:16px;text-align:center;color:#5e7e9e;"><i
+                            class="fas fa-info-circle"></i> <span id="chartNote">USD/MRU rate is derived from USD/RUB +
+                            RUB/MRU market data</span></p>
+                </div>
+            </div>
+
+            <!-- CALCULATOR -->
+            <div class="card">
+                <div class="card-header">
+                    <h2><i class="fas fa-calculator"></i> <span id="calculatorTitle">RUB-based Calculator</span></h2>
+                </div>
+                <div class="card-body">
+                    <div class="calc-card">
+                        <div class="direction-switch">
+                            <div class="dir-btn active" data-dir="rub2mru"><span id="rubToMruBtn">🇷🇺 RUB → MRU</span>
+                            </div>
+                            <div class="dir-btn" data-dir="mru2rub"><span id="mruToRubBtn">🇲🇷 MRU → RUB</span>
+                            </div>
+                        </div>
+
+                        <div id="rubToMruPanel">
+                            <div class="calc-row">
+                                <div class="calc-field"><label id="amountRubLabel">Amount (RUB)</label><input
+                                        type="number" id="amountRub" value="10000" step="500"></div>
+                                <div class="calc-field"><label id="youReceiveRubLabel">You receive (MRU)</label><input
+                                        type="text" id="convertedMru" readonly placeholder="0 MRU"></div>
+                            </div>
+                            <div class="calc-row">
+                                <div class="calc-field"><label id="feeTierLabel">Fee Tier</label>
+                                    <select id="feePercentRub">
+                                        <option value="2" id="feeEconomy">⚡ Economy 2% · 3 days</option>
+                                        <option value="6" id="feeBasic">📦 Basic 6% · Under 3000: 15min to 2h</option>
+                                        <option value="8" id="feeStandard">🚀 Standard 8% · 15min to 24h</option>
+                                        <option value="12" id="feeExpress">⚡ Express 12% · 30min-1h</option>
+                                        <option value="15" selected id="feeVip">👑 VIP 15% · 5-30min</option>
+                                    </select>
+                                </div>
+                                <div class="calc-field"><label id="totalFeeLabel">Total fee (RUB)</label><input
+                                        type="text" id="totalFeeRub" readonly placeholder="0 RUB"></div>
+                            </div>
+                            <div class="calc-result" id="rubResultDisplay"></div>
+
+                            <div class="recipient-section">
+                                <div class="recipient-title" style="font-weight:700;margin-bottom:12px;color:#e67e22;">
+                                    <i class="fas fa-user-plus"></i> <span id="recipientTitle">Recipient
+                                    Information</span></div>
+                                <div class="calc-row">
+                                    <div class="calc-field"><label id="firstNameLabel"><i class="fas fa-user"></i> <span id="firstNameLabelText">First Name</span></label><input type="text" id="firstName" placeholder="First name"></div>
+                                    <div class="calc-field"><label id="familyNameLabel"><i
+                                                class="fas fa-user-friends"></i> <span id="familyNameLabelText">Family Name</span></label><input type="text"
+                                            id="familyName" placeholder="Family name"></div>
+                                </div>
+                                <div class="calc-row">
+                                    <div class="calc-field"><label id="recipientPhoneLabel"><i
+                                                class="fas fa-mobile-alt"></i> <span id="recipientPhoneLabelText">Recipient's Phone</span></label><input type="tel"
+                                            id="recipientPhone" placeholder="+222 XX XX XX XX"></div>
+                                </div>
+                                <div class="calc-row">
+                                    <div class="calc-field"><label id="recipientBankLabel"><i
+                                                class="fas fa-university"></i> <span id="recipientBankLabelText">Recipient's Bank</span></label><input type="text"
+                                            id="recipientBank" placeholder="e.g., Bankily, Seberbank"></div>
+                                </div>
+                                <div class="fee-alert" id="feeAlert"><i class="fas fa-exclamation-triangle"></i> <span
+                                        id="feeAlertText">Fee: 0 RUB | Recipient will receive: 0 MRU</span></div>
+                            </div>
+                            <button class="btn-primary" id="submitPaymentRub"><i class="fas fa-credit-card"></i> <span
+                                    id="submitPaymentText">Submit Payment</span></button>
+                        </div>
+
+                        <div id="mruToRubPanel" style="display:none;">
+                            <div class="calc-row">
+                                <div class="calc-field"><label id="amountMruLabel">Amount (MRU)</label><input
+                                        type="number" id="amountMru" value="10000" step="500"></div>
+                                <div class="calc-field"><label id="youReceiveMruLabel">You receive (RUB)</label><input
+                                        type="text" id="convertedRub" readonly placeholder="0 RUB"></div>
+                            </div>
+                            <div class="calc-row">
+                                <div class="calc-field"><label id="feeTierMruLabel">Fee Tier</label>
+                                    <select id="feePercentMru">
+                                        <option value="2" id="feeEconomyMru">⚡ Economy 2% · 3 days</option>
+                                        <option value="6" id="feeBasicMru">📦 Basic 6% · Under 3000: 15min to 2h</option>
+                                        <option value="8" id="feeStandardMru">🚀 Standard 8% · 15min to 24h</option>
+                                        <option value="12" id="feeExpressMru">⚡ Express 12% · 30min-1h</option>
+                                        <option value="15" selected id="feeVipMru">👑 VIP 15% · 5-30min</option>
+                                    </select>
+                                </div>
+                                <div class="calc-field"><label id="totalFeeMruLabel">Total fee (MRU)</label><input
+                                        type="text" id="totalFeeMru" readonly placeholder="0 MRU"></div>
+                            </div>
+                            <div class="calc-result" id="mruResultDisplay"></div>
+
+                            <div class="recipient-section">
+                                <div class="recipient-title" style="font-weight:700;margin-bottom:12px;color:#e67e22;">
+                                    <i class="fas fa-user-plus"></i> <span id="recipientTitle2">Recipient
+                                    Information</span></div>
+                                <div class="calc-row">
+                                    <div class="calc-field"><label id="firstNameLabel2"><i class="fas fa-user"></i> <span id="firstNameLabelText2">First Name</span></label><input type="text" id="firstNameMru"
+                                            placeholder="First name"></div>
+                                    <div class="calc-field"><label id="familyNameLabel2"><i
+                                                class="fas fa-user-friends"></i> <span id="familyNameLabelText2">Family Name</span></label><input type="text"
+                                            id="familyNameMru" placeholder="Family name"></div>
+                                </div>
+                                <div class="calc-row">
+                                    <div class="calc-field"><label id="recipientPhoneLabel2"><i
+                                                class="fas fa-mobile-alt"></i> <span id="recipientPhoneLabelText2">Recipient's Phone</span></label><input type="tel"
+                                            id="recipientPhoneMru" placeholder="+7 XXX XXX XX XX"></div>
+                                </div>
+                                <div class="calc-row">
+                                    <div class="calc-field"><label id="recipientBankLabel2"><i
+                                                class="fas fa-university"></i> <span id="recipientBankLabelText2">Recipient's Bank</span></label><input type="text"
+                                            id="recipientBankMru" placeholder="e.g., Sberbank, Tinkoff"></div>
+                                </div>
+                                <div class="fee-alert" id="feeAlertMru"><i class="fas fa-exclamation-triangle"></i> <span
+                                        id="feeAlertTextMru">Fee: 0 MRU | Recipient will receive: 0 RUB</span></div>
+                            </div>
+                            <button class="btn-primary" id="submitPaymentMru"><i class="fas fa-credit-card"></i> <span
+                                    id="submitPaymentMruText">Submit Payment</span></button>
+                        </div>
+
+                        <div class="fee-note" id="feeNote">Fees: 2% to 15% based on delivery speed and amount</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- RECEIPTS -->
+            <div class="card">
+                <div class="card-header">
+                    <h2><i class="fas fa-images"></i> <span id="receiptsTitle">Payment Receipts</span></h2>
+                    <div class="upload-container">
+                        <button class="upload-btn" id="uploadPhotoBtnUrl"><i class="fas fa-link"></i> <span
+                                id="addReceiptUrlBtn">Add by URL</span></button>
+                        <label class="file-input-label" for="fileUploadInput"><i class="fas fa-upload"></i> <span
+                                id="uploadFileBtn">Upload Image</span></label>
+                        <input type="file" id="fileUploadInput" accept="image/*" style="display:none;">
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div id="photoGallery" class="gallery-grid"></div>
+                </div>
+            </div>
+
+            <!-- MY PAYMENTS -->
+            <div class="full-width card">
+                <div class="card-header">
+                    <h2><i class="fas fa-receipt"></i> <span id="myPaymentsTitle">My Payment Status</span></h2>
+                    <span style="font-size:0.7rem;background:#eef2fa;padding:4px 14px;border-radius:40px;"><i
+                            class="fas fa-info-circle"></i> <span id="myPaymentsSub">Track your requests</span></span>
+                </div>
+                <div class="card-body">
+                    <div id="myPaymentsList" class="my-payments-list">
+                        <div style="text-align:center;padding:24px;color:#95a5a6;"><i class="fas fa-inbox"></i> <span
+                                id="noPaymentsText">No payments submitted yet</span></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ============ MARKET NEWS ============ -->
+            <div class="full-width card">
+                <div class="card-header">
+                    <h2><i class="fas fa-newspaper"></i> <span id="marketNewsTitle">Market News</span></h2>
+                    <span
+                        style="background:#e74c3c;color:#fff;font-size:0.6rem;font-weight:700;padding:4px 14px;border-radius:30px;animation:livePulse 1.5s infinite;" id="liveBadgeNews">LIVE</span>
+                </div>
+                <style>
+                    @keyframes livePulse {
+                        0%,
+                        100% {
+                            opacity: 1;
+                        }
+                        50% {
+                            opacity: 0.5;
+                        }
+                    }
+                </style>
+                <div class="card-body">
+                    <div id="newsFeed" class="news-feed"></div>
+
+                    <!-- News Publish Form - Visible to ALL logged-in users -->
+                    <div class="news-publish-form" id="newsPublishForm">
+                        <input type="text" id="newsTitle" placeholder="Headline" style="flex:2; min-width:150px;">
+                        <select id="newsCategory" style="min-width:120px;">
+                            <option id="catExchange">Exchange</option>
+                            <option id="catEconomy">Economy</option>
+                            <option id="catAnnouncement">Announcement</option>
+                            <option id="catSecurity">Security</option>
+                        </select>
+                        <textarea id="newsContent" rows="1" placeholder="News content..." style="flex:3; min-width:180px;"></textarea>
+                        <button id="publishNewsBtn" class="publish-btn"><i class="fas fa-paper-plane"></i> <span
+                                id="publishNewsText">Publish</span></button>
+                        <span class="user-label" id="newsUserLabel"><i class="fas fa-user"></i> <span
+                                id="newsUserName">Guest</span></span>
+                    </div>
+
+                    <!-- Notice for non-logged-in users -->
+                    <div class="admin-publish-notice" id="regularUserNewsNotice">
+                        <i class="fas fa-info-circle"></i> <span id="newsNoticeText">📰 Please login to publish news</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PAYMENT HISTORY - Admin Only -->
+            <div class="full-width card admin-only" id="paymentHistoryCard">
+                <div class="card-header">
+                    <h2><i class="fas fa-history"></i> <span id="paymentHistoryTitle">All Payment History (Admin)</span>
+                    </h2>
+                </div>
+                <div class="card-body">
+                    <div id="paymentHistory" style="max-height:300px;overflow-y:auto;"></div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- ===== ADMIN PANEL ===== -->
+        <div class="admin-panel" id="adminPanel">
+            <h3><i class="fas fa-crown"></i> <span id="adminPanelTitle">Admin Control Panel</span></h3>
+            <div class="admin-box">
+                <h4><i class="fas fa-users"></i> <span id="registeredUsersTitle">Registered Users</span> (<span
+                        id="userCount">0</span>)</h4>
+                <div id="userReviewList"></div>
+                <div class="admin-control-buttons">
+                    <button class="admin-action-btn" id="exportUsersBtn"><i class="fas fa-download"></i> <span
+                            id="exportUsersText">Export Users</span></button>
+                    <button class="admin-action-btn danger" id="clearAllUsersBtn"><i class="fas fa-trash"></i> <span
+                            id="clearAllUsersText">Clear All Users</span></button>
+                </div>
+            </div>
+            <div class="admin-box">
+                <h4><i class="fas fa-receipt"></i> <span id="pendingPaymentsTitle">Pending Payments (All Users)</span>
+                </h4>
+                <div id="adminPaymentReview"></div>
+            </div>
+            <div class="admin-box">
+                <h4><i class="fas fa-chart-line"></i> <span id="statsTitle">Platform Statistics</span></h4>
+                <div id="platformStats" style="display:flex;gap:20px;flex-wrap:wrap;margin-top:10px;"></div>
+            </div>
+        </div>
+
+        <!-- ===== FOOTER ===== -->
+        <div class="footer"><span id="footerText">24/7 Support | @yandexrim | TradingView Charts | Secure
+                Platform</span></div>
+
+    </div>
+
+    <!-- ===== MODALS ===== -->
+    <div class="modal" id="successModal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal()">&times;</span>
+            <div class="success-icon"><i class="fas fa-check-circle"></i></div>
+            <h2 id="modalTitle">✅ Payment Request Submitted!</h2>
+            <p id="modalMessage">Your payment request has been received and is pending verification.</p>
+            <div class="payment-number"><i class="fas fa-university"></i> <span id="paymentNumber">+7 900 148 43
+                    51</span></div>
+            <div class="bank-instruction" id="bankInstruction">🏦 Please send the complete amount to the number above via
+                Seberbank.</div>
+            <button class="btn-primary" onclick="closeModal()" style="margin-top:16px;" id="modalOkBtn">OK, Got it</button>
+        </div>
+    </div>
+
+    <div class="photo-zoom-modal" id="photoZoomModal" onclick="closePhotoZoom()">
+        <span class="zoom-close" onclick="closePhotoZoom()">&times;</span>
+        <img class="zoom-content" id="zoomImage" src="" alt="Zoomed receipt">
+        <div class="zoom-caption" id="zoomCaption"></div>
+    </div>
+
+    <div class="security-badge"><i class="fas fa-crown"></i> <span id="securityText">Admin: yandexrimking | Login
+            Required</span></div>
+
+    <script>
+        // ============================================================
+        //  ADMIN CREDENTIALS
+        // ============================================================
+        const ADMIN_EMAIL = "yandexrimking";
+        const ADMIN_PASSWORD = "22614017";
+
+        // ============================================================
+        //  STATE
+        // ============================================================
+        let currentLang = 'en';
+        let payments = [];
+        let photos = [];
+        let news = [];
+        let users = [];
+        let currentUser = null;
+        let pendingVerification = null;
+        let verificationCodes = {};
+        let lastGeneratedCode = null;
+
+        // ============================================================
+        //  COMPLETE TRANSLATIONS
+        // ============================================================
+        const translations = {
+            en: {
+                brandName: "YANDEX RIM",
+                brandSub: "Fast & Secure Money Transfers",
+                heroText: "We help you make <span>fast and secure transfers</span> in the shortest possible time",
+                heroBadgeText: "⚡ 1 minute is all you need",
+                step1Text: "Step 1: Create Account",
+                step2Text: "Step 2: Verify Email",
+                step3Text: "Step 3: Login",
+                registerTitle: "📝 Create Your Account",
+                newUserWarning: "New users: Create an account to start transferring money",
+                regEmailLabel: "Email Address",
+                regPasswordLabel: "Password",
+                regConfirmLabel: "Confirm Password",
+                regCountryLabel: "Country of Residence",
+                countryDefault: "Select your country",
+                registerBtnText: "Create my account",
+                alreadyHaveAccountText: "Already have an account?",
+                switchToLogin: "Login here",
+                verifyTitle: "📧 Verify Your Email",
+                verifyWarning: "A verification code has been sent to your email address",
+                verificationTitle: "Enter Verification Code",
+                verifyBtnText: "Verify",
+                resendText: "Didn't receive code?",
+                resendLink: "Resend",
+                backToRegisterText: "Wrong email?",
+                backToRegisterLink: "Go back to registration",
+                loginTitle: "🔐 Login to Your Account",
+                loginWarning: "Existing users: Login with your email and password",
+                loginEmailLabel: "Email Address",
+                loginPasswordLabel: "Password",
+                loginBtnText: "Login",
+                noAccountText: "Don't have an account?",
+                switchToRegister: "Create account",
+                logoutBtnText: "Logout",
+                adminBadgeText: "Admin",
+                tradingViewTitle: "Live USD/RUB Chart",
+                poweredByLabel: "Powered by TradingView",
+                liveUsdRubLabel: "LIVE USD/RUB",
+                usdRubRate: "1 USD = -- RUB",
+                usdRubUpdate: "Loading live rate...",
+                chartHintText: "Chart interaction (scroll/zoom) is available for admins only",
+                usdToMruTitle: "USD → MRU Rate",
+                derivedLabel: "Derived rate",
+                liveMarketLabel: "LIVE MARKET RATE",
+                chartNote: "USD/MRU rate is derived from USD/RUB + RUB/MRU market data",
+                calculatorTitle: "RUB-based Calculator",
+                rubToMruBtn: "🇷🇺 RUB → MRU",
+                mruToRubBtn: "🇲🇷 MRU → RUB",
+                amountRubLabel: "Amount (RUB)",
+                youReceiveRubLabel: "You receive (MRU)",
+                feeTierLabel: "Fee Tier",
+                feeEconomy: "⚡ Economy 2% · 3 days",
+                feeBasic: "📦 Basic 6% · Under 3000: 15min to 2h",
+                feeStandard: "🚀 Standard 8% · 15min to 24h",
+                feeExpress: "⚡ Express 12% · 30min-1h",
+                feeVip: "👑 VIP 15% · 5-30min",
+                totalFeeLabel: "Total fee (RUB)",
+                submitPaymentText: "Submit Payment",
+                amountMruLabel: "Amount (MRU)",
+                youReceiveMruLabel: "You receive (RUB)",
+                feeTierMruLabel: "Fee Tier",
+                totalFeeMruLabel: "Total fee (MRU)",
+                submitPaymentMruText: "Submit Payment",
+                feeNote: "Fees: 2% to 15% based on delivery speed and amount",
+                recipientTitle: "Recipient Information",
+                firstNameLabelText: "First Name",
+                familyNameLabelText: "Family Name",
+                recipientPhoneLabelText: "Recipient's Phone",
+                recipientBankLabelText: "Recipient's Bank",
+                recipientTitle2: "Recipient Information",
+                firstNameLabelText2: "First Name",
+                familyNameLabelText2: "Family Name",
+                recipientPhoneLabelText2: "Recipient's Phone",
+                recipientBankLabelText2: "Recipient's Bank",
+                feeAlertPrefix: "Fee: ",
+                feeAlertMiddle: " | Recipient will receive: ",
+                receiptsTitle: "Payment Receipts",
+                addReceiptUrlBtn: "Add by URL",
+                uploadFileBtn: "Upload Image",
+                noReceipts: "No receipts uploaded",
+                myPaymentsTitle: "My Payment Status",
+                myPaymentsSub: "Track your requests",
+                noPaymentsText: "No payments submitted yet",
+                marketNewsTitle: "Market News",
+                liveBadgeNews: "LIVE",
+                catExchange: "Exchange",
+                catEconomy: "Economy",
+                catAnnouncement: "Announcement",
+                catSecurity: "Security",
+                publishNewsText: "Publish",
+                newsNoticeText: "📰 Please login to publish news",
+                noNews: "No news available",
+                paymentHistoryTitle: "All Payment History (Admin)",
+                noPaymentHistory: "No payment history.",
+                adminPanelTitle: "Admin Control Panel",
+                registeredUsersTitle: "Registered Users",
+                noUsers: "No users registered",
+                exportUsersText: "Export Users",
+                clearAllUsersText: "Clear All Users",
+                pendingPaymentsTitle: "Pending Payments (All Users)",
+                noPendingPayments: "No pending payments",
+                statsTitle: "Platform Statistics",
+                pending: "PENDING",
+                approved: "APPROVED",
+                rejected: "REJECTED",
+                statusPending: "PENDING",
+                statusApproved: "APPROVED",
+                statusRejected: "REJECTED",
+                modalTitle: "✅ Payment Request Submitted!",
+                modalMessage: "Your payment request has been received and is pending verification.",
+                modalInstructionRub: "🏦 Please send the complete amount to the number above via Seberbank.",
+                modalInstructionMru: "🏦 Please send the complete amount to the number above via Bankily.",
+                modalOkBtn: "OK, Got it",
+                footerText: "24/7 Support | @yandexrim | TradingView Charts | Secure Platform",
+                securityText: "Admin: yandexrimking | Login Required",
+                registrationSuccess: "Account created! Verification code sent to your email.",
+                registrationError: "An account with this email already exists. Please login.",
+                loginError: "Invalid email or password",
+                fillAllFields: "Please fill in all fields",
+                passwordMismatch: "Passwords do not match",
+                passwordLength: "Password must be at least 6 characters",
+                selectCountry: "Please select your country",
+                verificationSuccess: "Email verified successfully! You can now login.",
+                verificationError: "Invalid verification code",
+                resendSuccess: "New verification code sent to your email!",
+                demoCodeLabel: "📧 Demo Code:",
+                emailPlaceholder: "your@email.com",
+                passwordPlaceholder: "At least 6 characters",
+                confirmPlaceholder: "Confirm your password",
+                loginEmailPlaceholder: "your@email.com",
+                loginPasswordPlaceholder: "Enter your password",
+                firstNamePlaceholder: "First name",
+                familyNamePlaceholder: "Family name",
+                phonePlaceholderRub: "+222 XX XX XX XX",
+                phonePlaceholderMru: "+7 XXX XXX XX XX",
+                bankPlaceholderRub: "e.g., Bankily, Seberbank",
+                bankPlaceholderMru: "e.g., Sberbank, Tinkoff",
+                newsTitlePlaceholder: "Headline",
+                newsContentPlaceholder: "News content...",
+                welcomeBack: "Welcome back, ",
+                logoutMsg: "You have been logged out.",
+                deletePayment: "Delete Payment",
+                deleteConfirm: "Are you sure you want to delete this payment?",
+                paymentDeleted: "Payment deleted successfully!",
+                youReceive: "You receive",
+                deleteNews: "Delete",
+                deleteNewsConfirm: "Delete this news?",
+                newsDeleted: "News deleted",
+                newsApproved: "News approved",
+                newsRejected: "News rejected",
+                deleteNewsBtn: "Delete",
+            },
+            fr: {
+                brandName: "YANDEX RIM",
+                brandSub: "Transferts d'argent rapides et sécurisés",
+                heroText: "Nous vous aidons à effectuer des <span>transferts rapides et sécurisés</span> dans les plus brefs délais",
+                heroBadgeText: "⚡ 1 minute suffit",
+                step1Text: "Étape 1: Créer un compte",
+                step2Text: "Étape 2: Vérifier l'email",
+                step3Text: "Étape 3: Connexion",
+                registerTitle: "📝 Créer votre compte",
+                newUserWarning: "Nouveaux utilisateurs : Créez un compte pour commencer",
+                regEmailLabel: "Adresse e-mail",
+                regPasswordLabel: "Mot de passe",
+                regConfirmLabel: "Confirmer le mot de passe",
+                regCountryLabel: "Pays de résidence",
+                countryDefault: "Sélectionnez votre pays",
+                registerBtnText: "Créer mon compte",
+                alreadyHaveAccountText: "Vous avez déjà un compte ?",
+                switchToLogin: "Connectez-vous ici",
+                verifyTitle: "📧 Vérifier votre email",
+                verifyWarning: "Un code de vérification a été envoyé à votre adresse e-mail",
+                verificationTitle: "Entrez le code de vérification",
+                verifyBtnText: "Vérifier",
+                resendText: "Vous n'avez pas reçu le code ?",
+                resendLink: "Renvoyer",
+                backToRegisterText: "Mauvaise adresse e-mail ?",
+                backToRegisterLink: "Retour à l'inscription",
+                loginTitle: "🔐 Connectez-vous à votre compte",
+                loginWarning: "Utilisateurs existants : Connectez-vous avec votre email et mot de passe",
+                loginEmailLabel: "Adresse e-mail",
+                loginPasswordLabel: "Mot de passe",
+                loginBtnText: "Se connecter",
+                noAccountText: "Vous n'avez pas de compte ?",
+                switchToRegister: "Créer un compte",
+                logoutBtnText: "Déconnexion",
+                adminBadgeText: "Admin",
+                tradingViewTitle: "Graphique USD/RUB en direct",
+                poweredByLabel: "Propulsé par TradingView",
+                liveUsdRubLabel: "USD/RUB EN DIRECT",
+                usdRubRate: "1 USD = -- RUB",
+                usdRubUpdate: "Chargement du taux...",
+                chartHintText: "L'interaction avec le graphique est réservée aux admins",
+                usdToMruTitle: "Taux USD → MRU",
+                derivedLabel: "Taux dérivé",
+                liveMarketLabel: "TAUX EN DIRECT",
+                chartNote: "Le taux USD/MRU est dérivé des données USD/RUB + RUB/MRU",
+                calculatorTitle: "Calculateur RUB",
+                rubToMruBtn: "🇷🇺 RUB → MRU",
+                mruToRubBtn: "🇲🇷 MRU → RUB",
+                amountRubLabel: "Montant (RUB)",
+                youReceiveRubLabel: "Vous recevez (MRU)",
+                feeTierLabel: "Niveau de frais",
+                feeEconomy: "⚡ Économique 2% · 3 jours",
+                feeBasic: "📦 De base 6% · Moins de 3000: 15min à 2h",
+                feeStandard: "🚀 Standard 8% · 15min à 24h",
+                feeExpress: "⚡ Express 12% · 30min-1h",
+                feeVip: "👑 VIP 15% · 5-30min",
+                totalFeeLabel: "Frais totaux (RUB)",
+                submitPaymentText: "Soumettre",
+                amountMruLabel: "Montant (MRU)",
+                youReceiveMruLabel: "Vous recevez (RUB)",
+                feeTierMruLabel: "Niveau de frais",
+                totalFeeMruLabel: "Frais totaux (MRU)",
+                submitPaymentMruText: "Soumettre",
+                feeNote: "Frais : 2% à 15% selon la vitesse",
+                recipientTitle: "Informations du destinataire",
+                firstNameLabelText: "Prénom",
+                familyNameLabelText: "Nom",
+                recipientPhoneLabelText: "Téléphone",
+                recipientBankLabelText: "Banque",
+                recipientTitle2: "Informations du destinataire",
+                firstNameLabelText2: "Prénom",
+                familyNameLabelText2: "Nom",
+                recipientPhoneLabelText2: "Téléphone",
+                recipientBankLabelText2: "Banque",
+                feeAlertPrefix: "Frais : ",
+                feeAlertMiddle: " | Le destinataire recevra : ",
+                receiptsTitle: "Reçus de paiement",
+                addReceiptUrlBtn: "Ajouter par URL",
+                uploadFileBtn: "Télécharger",
+                noReceipts: "Aucun reçu téléchargé",
+                myPaymentsTitle: "Statut de mes paiements",
+                myPaymentsSub: "Suivez vos demandes",
+                noPaymentsText: "Aucun paiement soumis",
+                marketNewsTitle: "Actualités du marché",
+                liveBadgeNews: "EN DIRECT",
+                catExchange: "Change",
+                catEconomy: "Économie",
+                catAnnouncement: "Annonce",
+                catSecurity: "Sécurité",
+                publishNewsText: "Publier",
+                newsNoticeText: "📰 Veuillez vous connecter pour publier",
+                noNews: "Aucune actualité disponible",
+                paymentHistoryTitle: "Historique des paiements (Admin)",
+                noPaymentHistory: "Aucun historique.",
+                adminPanelTitle: "Panneau admin",
+                registeredUsersTitle: "Utilisateurs inscrits",
+                noUsers: "Aucun utilisateur",
+                exportUsersText: "Exporter",
+                clearAllUsersText: "Effacer tout",
+                pendingPaymentsTitle: "Paiements en attente (tous)",
+                noPendingPayments: "Aucun paiement en attente",
+                statsTitle: "Statistiques",
+                pending: "EN ATTENTE",
+                approved: "APPROUVÉ",
+                rejected: "REJETÉ",
+                statusPending: "EN ATTENTE",
+                statusApproved: "APPROUVÉ",
+                statusRejected: "REJETÉ",
+                modalTitle: "✅ Demande soumise !",
+                modalMessage: "Votre demande a été reçue et est en attente.",
+                modalInstructionRub: "🏦 Veuillez envoyer le montant total au numéro ci-dessus via Seberbank.",
+                modalInstructionMru: "🏦 Veuillez envoyer le montant total au numéro ci-dessus via Bankily.",
+                modalOkBtn: "OK, compris",
+                footerText: "Support 24/7 | @yandexrim | TradingView | Plateforme sécurisée",
+                securityText: "Admin: yandexrimking | Connexion requise",
+                registrationSuccess: "Compte créé ! Code envoyé à votre e-mail.",
+                registrationError: "Un compte existe déjà avec cet e-mail.",
+                loginError: "E-mail ou mot de passe invalide",
+                fillAllFields: "Veuillez remplir tous les champs",
+                passwordMismatch: "Les mots de passe ne correspondent pas",
+                passwordLength: "Le mot de passe doit faire au moins 6 caractères",
+                selectCountry: "Veuillez sélectionner votre pays",
+                verificationSuccess: "E-mail vérifié ! Vous pouvez vous connecter.",
+                verificationError: "Code de vérification invalide",
+                resendSuccess: "Nouveau code envoyé à votre e-mail !",
+                demoCodeLabel: "📧 Code de démo :",
+                emailPlaceholder: "votre@email.com",
+                passwordPlaceholder: "Au moins 6 caractères",
+                confirmPlaceholder: "Confirmez votre mot de passe",
+                loginEmailPlaceholder: "votre@email.com",
+                loginPasswordPlaceholder: "Entrez votre mot de passe",
+                firstNamePlaceholder: "Prénom",
+                familyNamePlaceholder: "Nom",
+                phonePlaceholderRub: "+222 XX XX XX XX",
+                phonePlaceholderMru: "+7 XXX XXX XX XX",
+                bankPlaceholderRub: "ex: Bankily, Seberbank",
+                bankPlaceholderMru: "ex: Sberbank, Tinkoff",
+                newsTitlePlaceholder: "Titre",
+                newsContentPlaceholder: "Contenu...",
+                welcomeBack: "Bon retour, ",
+                logoutMsg: "Vous avez été déconnecté.",
+                deletePayment: "Supprimer",
+                deleteConfirm: "Voulez-vous vraiment supprimer ce paiement ?",
+                paymentDeleted: "Paiement supprimé !",
+                youReceive: "Vous recevez",
+                deleteNews: "Supprimer",
+                deleteNewsConfirm: "Supprimer cette actualité ?",
+                newsDeleted: "Actualité supprimée",
+                newsApproved: "Actualité approuvée",
+                newsRejected: "Actualité rejetée",
+                deleteNewsBtn: "Supprimer",
+            },
+            ar: {
+                brandName: "ياندكس ريم",
+                brandSub: "تحويلات مالية سريعة وآمنة",
+                heroText: "نساعدك في إجراء <span>تحويلات سريعة وآمنة</span> في أقصر وقت ممكن",
+                heroBadgeText: "⚡ دقيقة واحدة فقط",
+                step1Text: "الخطوة 1: إنشاء حساب",
+                step2Text: "الخطوة 2: تأكيد البريد",
+                step3Text: "الخطوة 3: تسجيل الدخول",
+                registerTitle: "📝 إنشاء حسابك",
+                newUserWarning: "مستخدمون جدد: أنشئ حسابًا لبدء التحويل",
+                regEmailLabel: "البريد الإلكتروني",
+                regPasswordLabel: "كلمة المرور",
+                regConfirmLabel: "تأكيد كلمة المرور",
+                regCountryLabel: "بلد الإقامة",
+                countryDefault: "اختر بلدك",
+                registerBtnText: "إنشاء حسابي",
+                alreadyHaveAccountText: "لديك حساب بالفعل؟",
+                switchToLogin: "تسجيل الدخول هنا",
+                verifyTitle: "📧 تأكيد بريدك",
+                verifyWarning: "تم إرسال رمز التحقق إلى بريدك",
+                verificationTitle: "أدخل رمز التحقق",
+                verifyBtnText: "تحقق",
+                resendText: "لم تستلم الرمز؟",
+                resendLink: "إعادة الإرسال",
+                backToRegisterText: "بريد خاطئ؟",
+                backToRegisterLink: "العودة للتسجيل",
+                loginTitle: "🔐 تسجيل الدخول",
+                loginWarning: "المستخدمون الحاليون: سجل الدخول",
+                loginEmailLabel: "البريد الإلكتروني",
+                loginPasswordLabel: "كلمة المرور",
+                loginBtnText: "تسجيل الدخول",
+                noAccountText: "ليس لديك حساب؟",
+                switchToRegister: "إنشاء حساب",
+                logoutBtnText: "تسجيل الخروج",
+                adminBadgeText: "مدير",
+                tradingViewTitle: "رسم بياني USD/RUB",
+                poweredByLabel: "بواسطة TradingView",
+                liveUsdRubLabel: "USD/RUB مباشر",
+                usdRubRate: "1 USD = -- RUB",
+                usdRubUpdate: "جاري تحميل السعر...",
+                chartHintText: "التفاعل مع الرسم البياني متاح فقط للمشرفين",
+                usdToMruTitle: "سعر USD → MRU",
+                derivedLabel: "سعر مشتق",
+                liveMarketLabel: "سعر السوق",
+                chartNote: "سعر USD/MRU مشتق من USD/RUB + RUB/MRU",
+                calculatorTitle: "حاسبة RUB",
+                rubToMruBtn: "🇷🇺 RUB → MRU",
+                mruToRubBtn: "🇲🇷 MRU → RUB",
+                amountRubLabel: "المبلغ (RUB)",
+                youReceiveRubLabel: "ستستلم (MRU)",
+                feeTierLabel: "مستوى الرسوم",
+                feeEconomy: "⚡ اقتصادي 2% · 3 أيام",
+                feeBasic: "📦 أساسي 6% · أقل من 3000: 15د إلى 2س",
+                feeStandard: "🚀 قياسي 8% · 15د إلى 24س",
+                feeExpress: "⚡ سريع 12% · 30د-1س",
+                feeVip: "👑 كبار الشخصيات 15% · 5-30د",
+                totalFeeLabel: "إجمالي الرسوم (RUB)",
+                submitPaymentText: "تقديم الدفع",
+                amountMruLabel: "المبلغ (MRU)",
+                youReceiveMruLabel: "ستستلم (RUB)",
+                feeTierMruLabel: "مستوى الرسوم",
+                totalFeeMruLabel: "إجمالي الرسوم (MRU)",
+                submitPaymentMruText: "تقديم الدفع",
+                feeNote: "الرسوم: 2٪ إلى 15٪ حسب السرعة",
+                recipientTitle: "معلومات المستلم",
+                firstNameLabelText: "الاسم الأول",
+                familyNameLabelText: "اسم العائلة",
+                recipientPhoneLabelText: "رقم الهاتف",
+                recipientBankLabelText: "اسم البنك",
+                recipientTitle2: "معلومات المستلم",
+                firstNameLabelText2: "الاسم الأول",
+                familyNameLabelText2: "اسم العائلة",
+                recipientPhoneLabelText2: "رقم الهاتف",
+                recipientBankLabelText2: "اسم البنك",
+                feeAlertPrefix: "الرسوم: ",
+                feeAlertMiddle: " | سيستلم المستلم: ",
+                receiptsTitle: "إيصالات الدفع",
+                addReceiptUrlBtn: "إضافة عبر رابط",
+                uploadFileBtn: "رفع صورة",
+                noReceipts: "لا توجد إيصالات",
+                myPaymentsTitle: "حالة مدفوعاتي",
+                myPaymentsSub: "تتبع طلباتك",
+                noPaymentsText: "لم يتم تقديم أي مدفوعات",
+                marketNewsTitle: "أخبار السوق",
+                liveBadgeNews: "مباشر",
+                catExchange: "صرافة",
+                catEconomy: "اقتصاد",
+                catAnnouncement: "إعلان",
+                catSecurity: "أمان",
+                publishNewsText: "نشر",
+                newsNoticeText: "📰 يرجى تسجيل الدخول لنشر الأخبار",
+                noNews: "لا توجد أخبار",
+                paymentHistoryTitle: "سجل المدفوعات (المشرف)",
+                noPaymentHistory: "لا يوجد سجل.",
+                adminPanelTitle: "لوحة التحكم",
+                registeredUsersTitle: "المستخدمون المسجلون",
+                noUsers: "لا يوجد مستخدمون",
+                exportUsersText: "تصدير",
+                clearAllUsersText: "مسح الكل",
+                pendingPaymentsTitle: "المدفوعات المعلقة (جميع المستخدمين)",
+                noPendingPayments: "لا توجد مدفوعات معلقة",
+                statsTitle: "إحصائيات المنصة",
+                pending: "معلق",
+                approved: "تمت الموافقة",
+                rejected: "مرفوض",
+                statusPending: "معلق",
+                statusApproved: "تمت الموافقة",
+                statusRejected: "مرفوض",
+                modalTitle: "✅ تم تقديم طلب الدفع!",
+                modalMessage: "تم استلام طلبك وهو في انتظار التحقق.",
+                modalInstructionRub: "🏦 يرجى إرسال المبلغ الكامل إلى الرقم أعلاه عبر بنك سيبر.",
+                modalInstructionMru: "🏦 يرجى إرسال المبلغ الكامل إلى الرقم أعلاه عبر بنك Bankily.",
+                modalOkBtn: "حسنًا، فهمت",
+                footerText: "دعم 24/7 | @yandexrim | TradingView | منصة آمنة",
+                securityText: "المشرف: yandexrimking | تسجيل الدخول مطلوب",
+                registrationSuccess: "تم إنشاء الحساب! تم إرسال رمز التحقق.",
+                registrationError: "يوجد حساب بهذا البريد بالفعل.",
+                loginError: "البريد أو كلمة المرور غير صحيحة",
+                fillAllFields: "يرجى ملء جميع الحقول",
+                passwordMismatch: "كلمات المرور غير متطابقة",
+                passwordLength: "كلمة المرور يجب أن تكون 6 أحرف على الأقل",
+                selectCountry: "يرجى اختيار بلدك",
+                verificationSuccess: "تم تأكيد البريد! يمكنك تسجيل الدخول.",
+                verificationError: "رمز التحقق غير صحيح",
+                resendSuccess: "تم إرسال رمز تحقق جديد!",
+                demoCodeLabel: "📧 رمز تجريبي:",
+                emailPlaceholder: "بريدك@example.com",
+                passwordPlaceholder: "6 أحرف على الأقل",
+                confirmPlaceholder: "تأكيد كلمة المرور",
+                loginEmailPlaceholder: "بريدك@example.com",
+                loginPasswordPlaceholder: "أدخل كلمة المرور",
+                firstNamePlaceholder: "الاسم الأول",
+                familyNamePlaceholder: "اسم العائلة",
+                phonePlaceholderRub: "+222 XX XX XX XX",
+                phonePlaceholderMru: "+7 XXX XXX XX XX",
+                bankPlaceholderRub: "مثل: Bankily, Seberbank",
+                bankPlaceholderMru: "مثل: Sberbank, Tinkoff",
+                newsTitlePlaceholder: "العنوان",
+                newsContentPlaceholder: "محتوى الخبر...",
+                welcomeBack: "مرحبًا بعودتك، ",
+                logoutMsg: "تم تسجيل الخروج.",
+                deletePayment: "حذف الدفع",
+                deleteConfirm: "هل أنت متأكد من حذف هذا الدفع؟",
+                paymentDeleted: "تم حذف الدفع بنجاح!",
+                youReceive: "ستستلم",
+                deleteNews: "حذف",
+                deleteNewsConfirm: "حذف هذا الخبر؟",
+                newsDeleted: "تم حذف الخبر",
+                newsApproved: "تمت الموافقة على الخبر",
+                newsRejected: "تم رفض الخبر",
+                deleteNewsBtn: "حذف",
+            }
+        };
+
+        // ============================================================
+        //  LANGUAGE
+        // ============================================================
+        function updateLanguage(lang) {
+            currentLang = lang;
+            const t = translations[lang];
+            if (!t) return;
+
+            if (lang === 'ar') {
+                document.body.classList.add('rtl');
+            } else {
+                document.body.classList.remove('rtl');
+            }
+
+            document.getElementById('brandName').textContent = t.brandName;
+            document.getElementById('brandSub').textContent = t.brandSub;
+            document.getElementById('heroText').innerHTML = t.heroText;
+            document.getElementById('heroBadgeText').textContent = t.heroBadgeText;
+            document.getElementById('step1Text').textContent = t.step1Text;
+            document.getElementById('step2Text').textContent = t.step2Text;
+            document.getElementById('step3Text').textContent = t.step3Text;
+            document.getElementById('registerTitle').textContent = t.registerTitle;
+            document.getElementById('newUserWarning').textContent = t.newUserWarning;
+            document.getElementById('regEmailLabel').innerHTML = `<i class="fas fa-envelope"></i> ${t.regEmailLabel}`;
+            document.getElementById('regPasswordLabel').innerHTML = `<i class="fas fa-lock"></i> ${t.regPasswordLabel}`;
+            document.getElementById('regConfirmLabel').innerHTML = `<i class="fas fa-check-circle"></i> ${t.regConfirmLabel}`;
+            document.getElementById('regCountryLabel').innerHTML = `<i class="fas fa-globe"></i> ${t.regCountryLabel}`;
+            document.getElementById('countryDefault').textContent = t.countryDefault;
+            document.getElementById('registerBtnText').textContent = t.registerBtnText;
+            document.getElementById('alreadyHaveAccountText').textContent = t.alreadyHaveAccountText;
+            document.getElementById('switchToLoginFromReg').textContent = t.switchToLogin;
+            document.getElementById('verifyTitle').textContent = t.verifyTitle;
+            document.getElementById('verifyWarning').innerHTML = `<i class="fas fa-envelope"></i> ${t.verifyWarning}`;
+            document.getElementById('verificationTitle').innerHTML = `<i class="fas fa-key"></i> ${t.verificationTitle}`;
+            document.getElementById('verifyBtnText').textContent = t.verifyBtnText;
+            document.getElementById('resendText').textContent = t.resendText;
+            document.getElementById('resendCodeLink').textContent = t.resendLink;
+            document.getElementById('backToRegisterText').textContent = t.backToRegisterText;
+            document.getElementById('backToRegisterLink').textContent = t.backToRegisterLink;
+            document.getElementById('loginTitle').textContent = t.loginTitle;
+            document.getElementById('loginWarning').innerHTML = `<i class="fas fa-key"></i> ${t.loginWarning}`;
+            document.getElementById('loginEmailLabel').innerHTML = `<i class="fas fa-envelope"></i> ${t.loginEmailLabel}`;
+            document.getElementById('loginPasswordLabel').innerHTML = `<i class="fas fa-lock"></i> ${t.loginPasswordLabel}`;
+            document.getElementById('loginBtnText').textContent = t.loginBtnText;
+            document.getElementById('noAccountText').textContent = t.noAccountText;
+            document.getElementById('switchToRegisterFromLogin').textContent = t.switchToRegister;
+            document.getElementById('logoutBtnText').textContent = t.logoutBtnText;
+            document.getElementById('adminBadgeText').textContent = t.adminBadgeText;
+
+            // Charts
+            document.getElementById('tradingViewTitle').textContent = t.tradingViewTitle;
+            document.getElementById('poweredByLabel').textContent = t.poweredByLabel;
+            document.getElementById('liveUsdRubLabel').textContent = t.liveUsdRubLabel;
+            document.getElementById('usdRubRate').textContent = t.usdRubRate;
+            document.getElementById('usdRubUpdate').textContent = t.usdRubUpdate;
+            document.getElementById('chartHintText').textContent = t.chartHintText;
+            document.getElementById('usdToMruTitle').textContent = t.usdToMruTitle;
+            document.getElementById('derivedLabel').textContent = t.derivedLabel;
+            document.getElementById('liveMarketLabel').textContent = t.liveMarketLabel;
+            document.getElementById('chartNote').textContent = t.chartNote;
+
+            // Calculator
+            document.getElementById('calculatorTitle').textContent = t.calculatorTitle;
+            document.getElementById('rubToMruBtn').textContent = t.rubToMruBtn;
+            document.getElementById('mruToRubBtn').textContent = t.mruToRubBtn;
+            document.getElementById('amountRubLabel').textContent = t.amountRubLabel;
+            document.getElementById('youReceiveRubLabel').textContent = t.youReceiveRubLabel;
+            document.getElementById('feeTierLabel').textContent = t.feeTierLabel;
+            document.getElementById('feeEconomy').textContent = t.feeEconomy;
+            document.getElementById('feeBasic').textContent = t.feeBasic;
+            document.getElementById('feeStandard').textContent = t.feeStandard;
+            document.getElementById('feeExpress').textContent = t.feeExpress;
+            document.getElementById('feeVip').textContent = t.feeVip;
+            document.getElementById('totalFeeLabel').textContent = t.totalFeeLabel;
+            document.getElementById('submitPaymentText').textContent = t.submitPaymentText;
+            document.getElementById('amountMruLabel').textContent = t.amountMruLabel;
+            document.getElementById('youReceiveMruLabel').textContent = t.youReceiveMruLabel;
+            document.getElementById('feeTierMruLabel').textContent = t.feeTierMruLabel;
+            document.getElementById('feeEconomyMru').textContent = t.feeEconomy;
+            document.getElementById('feeBasicMru').textContent = t.feeBasic;
+            document.getElementById('feeStandardMru').textContent = t.feeStandard;
+            document.getElementById('feeExpressMru').textContent = t.feeExpress;
+            document.getElementById('feeVipMru').textContent = t.feeVip;
+            document.getElementById('totalFeeMruLabel').textContent = t.totalFeeMruLabel;
+            document.getElementById('submitPaymentMruText').textContent = t.submitPaymentMruText;
+            document.getElementById('feeNote').textContent = t.feeNote;
+            document.getElementById('recipientTitle').innerHTML = `<i class="fas fa-user-plus"></i> ${t.recipientTitle}`;
+            document.getElementById('firstNameLabelText').textContent = t.firstNameLabelText;
+            document.getElementById('familyNameLabelText').textContent = t.familyNameLabelText;
+            document.getElementById('recipientPhoneLabelText').textContent = t.recipientPhoneLabelText;
+            document.getElementById('recipientBankLabelText').textContent = t.recipientBankLabelText;
+            document.getElementById('recipientTitle2').innerHTML = `<i class="fas fa-user-plus"></i> ${t.recipientTitle2}`;
+            document.getElementById('firstNameLabelText2').textContent = t.firstNameLabelText2;
+            document.getElementById('familyNameLabelText2').textContent = t.familyNameLabelText2;
+            document.getElementById('recipientPhoneLabelText2').textContent = t.recipientPhoneLabelText2;
+            document.getElementById('recipientBankLabelText2').textContent = t.recipientBankLabelText2;
+
+            // Receipts
+            document.getElementById('receiptsTitle').innerHTML = `<i class="fas fa-images"></i> ${t.receiptsTitle}`;
+            document.getElementById('addReceiptUrlBtn').innerHTML = `<i class="fas fa-link"></i> ${t.addReceiptUrlBtn}`;
+            document.getElementById('uploadFileBtn').innerHTML = `<i class="fas fa-upload"></i> ${t.uploadFileBtn}`;
+
+            // My Payments
+            document.getElementById('myPaymentsTitle').innerHTML = `<i class="fas fa-receipt"></i> ${t.myPaymentsTitle}`;
+            document.getElementById('myPaymentsSub').textContent = t.myPaymentsSub;
+            document.getElementById('noPaymentsText').textContent = t.noPaymentsText;
+
+            // News
+            document.getElementById('marketNewsTitle').innerHTML = `<i class="fas fa-newspaper"></i> ${t.marketNewsTitle}`;
+            document.getElementById('liveBadgeNews').textContent = t.liveBadgeNews;
+            document.getElementById('catExchange').textContent = t.catExchange;
+            document.getElementById('catEconomy').textContent = t.catEconomy;
+            document.getElementById('catAnnouncement').textContent = t.catAnnouncement;
+            document.getElementById('catSecurity').textContent = t.catSecurity;
+            document.getElementById('publishNewsText').innerHTML = `<i class="fas fa-paper-plane"></i> ${t.publishNewsText}`;
+            document.getElementById('newsNoticeText').innerHTML = t.newsNoticeText;
+            document.getElementById('newsTitle').placeholder = t.newsTitlePlaceholder;
+            document.getElementById('newsContent').placeholder = t.newsContentPlaceholder;
+
+            // Payment History
+            document.getElementById('paymentHistoryTitle').innerHTML = `<i class="fas fa-history"></i> ${t.paymentHistoryTitle}`;
+
+            // Admin Panel
+            document.getElementById('adminPanelTitle').innerHTML = `<i class="fas fa-crown"></i> ${t.adminPanelTitle}`;
+            document.getElementById('registeredUsersTitle').innerHTML = `<i class="fas fa-users"></i> ${t.registeredUsersTitle}`;
+            document.getElementById('exportUsersText').innerHTML = `<i class="fas fa-download"></i> ${t.exportUsersText}`;
+            document.getElementById('clearAllUsersText').innerHTML = `<i class="fas fa-trash"></i> ${t.clearAllUsersText}`;
+            document.getElementById('pendingPaymentsTitle').innerHTML = `<i class="fas fa-receipt"></i> ${t.pendingPaymentsTitle}`;
+            document.getElementById('statsTitle').innerHTML = `<i class="fas fa-chart-line"></i> ${t.statsTitle}`;
+
+            // Modal
+            document.getElementById('modalTitle').textContent = t.modalTitle;
+            document.getElementById('modalMessage').textContent = t.modalMessage;
+            document.getElementById('modalOkBtn').textContent = t.modalOkBtn;
+
+            // Footer
+            document.getElementById('footerText').textContent = t.footerText;
+            document.getElementById('securityText').textContent = t.securityText;
+
+            // Placeholders
+            document.getElementById('regEmail').placeholder = t.emailPlaceholder;
+            document.getElementById('regPassword').placeholder = t.passwordPlaceholder;
+            document.getElementById('regConfirmPassword').placeholder = t.confirmPlaceholder;
+            document.getElementById('loginEmail').placeholder = t.loginEmailPlaceholder;
+            document.getElementById('loginPassword').placeholder = t.loginPasswordPlaceholder;
+            document.getElementById('firstName').placeholder = t.firstNamePlaceholder;
+            document.getElementById('familyName').placeholder = t.familyNamePlaceholder;
+            document.getElementById('recipientPhone').placeholder = t.phonePlaceholderRub;
+            document.getElementById('recipientBank').placeholder = t.bankPlaceholderRub;
+            document.getElementById('firstNameMru').placeholder = t.firstNamePlaceholder;
+            document.getElementById('familyNameMru').placeholder = t.familyNamePlaceholder;
+            document.getElementById('recipientPhoneMru').placeholder = t.phonePlaceholderMru;
+            document.getElementById('recipientBankMru').placeholder = t.bankPlaceholderMru;
+
+            // Demo code label
+            document.getElementById('demoCodeLabel').innerHTML = t.demoCodeLabel;
+
+            // Lang buttons
+            document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b.dataset.lang === lang));
+
+            // Re-render dynamic content
+            if (currentUser) {
+                renderMyPayments();
+                renderPaymentHistory();
+                renderAdminUsers();
+                renderAdminPayments();
+                renderPlatformStats();
+            }
+            renderNews();
+            renderGallery();
+            updateFeeAlert();
+        }
+
+        document.querySelectorAll('.lang-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                updateLanguage(btn.dataset.lang);
+            });
+        });
+
+        // ============================================================
+        //  STEP NAVIGATION
+        // ============================================================
+        function goToStep(step) {
+            document.querySelectorAll('.step-tab').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.step-content').forEach(c => c.classList.remove('active'));
+            document.getElementById(`step${step}Tab`).classList.add('active');
+            document.getElementById(`step${step}Content`).classList.add('active');
+        }
+
+        function markStepCompleted(step) {
+            document.getElementById(`step${step}Tab`).classList.add('completed');
+        }
+
+        document.getElementById('switchToLoginFromReg').addEventListener('click', () => goToStep(3));
+        document.getElementById('switchToRegisterFromLogin').addEventListener('click', () => goToStep(1));
+        document.getElementById('backToRegisterLink').addEventListener('click', () => goToStep(1));
+
+        // ============================================================
+        //  AUTH
+        // ============================================================
+        function generateVerificationCode() {
+            const code = Math.floor(100000 + Math.random() * 900000).toString();
+            lastGeneratedCode = code;
+            return code;
+        }
+
+        function sendVerificationEmail(email, code) {
+            console.log(`📧 Verification code ${code} sent to ${email}`);
+            showToast(`📧 Verification code ${code} sent to ${email}`, '#0088cc');
+            verificationCodes[email] = { code, timestamp: Date.now(), verified: false };
+            document.getElementById('demoCodeDisplay').style.display = 'block';
+            document.getElementById('demoCodeSpan').textContent = code;
+            return true;
+        }
+
+        document.getElementById('registerBtn').addEventListener('click', function() {
+            const email = document.getElementById('regEmail').value.trim();
+            const password = document.getElementById('regPassword').value;
+            const confirm = document.getElementById('regConfirmPassword').value;
+            const country = document.getElementById('regCountry').value;
+            const t = translations[currentLang];
+            const err = document.getElementById('registerError');
+            const suc = document.getElementById('registerSuccess');
+            err.textContent = '';
+            suc.textContent = '';
+
+            if (!email || !password || !confirm || !country) { err.textContent = t.fillAllFields; return; }
+            if (password.length < 6) { err.textContent = t.passwordLength; return; }
+            if (password !== confirm) { err.textContent = t.passwordMismatch; return; }
+            if (users.find(u => u.email === email)) { err.textContent = t.registrationError; return; }
+
+            const code = generateVerificationCode();
+            sendVerificationEmail(email, code);
+            pendingVerification = { email, password: btoa(password), country, verificationCode: code, timestamp: Date
+                    .now() };
+
+            document.getElementById('regEmail').value = '';
+            document.getElementById('regPassword').value = '';
+            document.getElementById('regConfirmPassword').value = '';
+            document.getElementById('regCountry').value = '';
+            suc.textContent = t.registrationSuccess;
+            showToast(t.registrationSuccess, '#2ecc71');
+            markStepCompleted(1);
+            goToStep(2);
+        });
+
+        document.getElementById('verifyCodeBtn').addEventListener('click', function() {
+            const code = document.getElementById('verificationCode').value.trim();
+            const t = translations[currentLang];
+            const err = document.getElementById('verifyError');
+            const suc = document.getElementById('verifySuccess');
+            err.textContent = '';
+            suc.textContent = '';
+
+            if (!pendingVerification) { err.textContent = 'No pending registration.'; goToStep(1); return; }
+            if (!code || code.length !== 6) { err.textContent = 'Please enter the 6-digit code.'; return; }
+
+            if (pendingVerification.verificationCode === code) {
+                const newUser = {
+                    id: Date.now().toString(),
+                    email: pendingVerification.email,
+                    password: pendingVerification.password,
+                    country: pendingVerification.country,
+                    registeredAt: Date.now(),
+                    status: 'active',
+                    isAdmin: pendingVerification.email === ADMIN_EMAIL,
+                    emailVerified: true
+                };
+                users.push(newUser);
+                saveUsers();
+                suc.textContent = t.verificationSuccess;
+                showToast(t.verificationSuccess, '#2ecc71');
+                if (verificationCodes[pendingVerification.email]) verificationCodes[pendingVerification.email].verified =
+                    true;
+                pendingVerification = null;
+                document.getElementById('verificationCode').value = '';
+                document.getElementById('demoCodeDisplay').style.display = 'none';
+                markStepCompleted(2);
+                goToStep(3);
+            } else {
+                err.textContent = t.verificationError;
+            }
+        });
+
+        document.getElementById('resendCodeLink').addEventListener('click', function() {
+            const t = translations[currentLang];
+            if (!pendingVerification) { showToast('No pending registration.', '#e74c3c');
+                goToStep(1); return; }
+            const newCode = generateVerificationCode();
+            pendingVerification.verificationCode = newCode;
+            sendVerificationEmail(pendingVerification.email, newCode);
+            showToast(t.resendSuccess, '#2ecc71');
+        });
+
+        document.getElementById('loginBtn').addEventListener('click', function() {
+            const email = document.getElementById('loginEmail').value.trim();
+            const password = document.getElementById('loginPassword').value;
+            const t = translations[currentLang];
+            const err = document.getElementById('loginError');
+            err.textContent = '';
+
+            if (!email || !password) { err.textContent = t.fillAllFields; return; }
+
+            const user = users.find(u => u.email === email && u.password === btoa(password));
+            if (!user) { err.textContent = t.loginError; return; }
+
+            currentUser = user;
+            saveUser(currentUser);
+            document.getElementById('loginEmail').value = '';
+            document.getElementById('loginPassword').value = '';
+            showToast(t.welcomeBack + email + '!', '#2ecc71');
+            updateUIForLoggedInUser();
+        });
+
+        // ============================================================
+        //  LOGOUT - CLEAR ALL USER DATA
+        // ============================================================
+        document.getElementById('logoutBtn').addEventListener('click', function() {
+            const t = translations[currentLang];
+
+            document.getElementById('firstName').value = '';
+            document.getElementById('familyName').value = '';
+            document.getElementById('recipientPhone').value = '';
+            document.getElementById('recipientBank').value = '';
+            document.getElementById('firstNameMru').value = '';
+            document.getElementById('familyNameMru').value = '';
+            document.getElementById('recipientPhoneMru').value = '';
+            document.getElementById('recipientBankMru').value = '';
+            document.getElementById('amountRub').value = '10000';
+            document.getElementById('amountMru').value = '10000';
+
+            currentUser = null;
+            localStorage.removeItem('yandex_rim_user');
+
+            updateUIForLoggedOutUser();
+            showToast(t.logoutMsg, '#95a5a6');
+
+            renderMyPayments();
+            renderGallery();
+            renderNews();
+            renderPaymentHistory();
+            renderAdminUsers();
+            renderAdminPayments();
+            renderPlatformStats();
+        });
+
+        // ============================================================
+        //  UI STATE
+        // ============================================================
+        function updateUIForLoggedInUser() {
+            const isAdmin = currentUser && (currentUser.isAdmin || currentUser.email === ADMIN_EMAIL);
+
+            document.getElementById('stepContainer').style.display = 'none';
+            document.getElementById('userBar').classList.add('show');
+            document.getElementById('dashboardGrid').classList.add('show');
+            document.getElementById('userEmailDisplay').textContent = currentUser.email;
+            document.getElementById('userCountryDisplay').textContent = currentUser.country;
+
+            const userLabel = document.getElementById('newsUserName');
+            if (userLabel) userLabel.textContent = currentUser.email;
+
+            const publishForm = document.getElementById('newsPublishForm');
+            const regularNotice = document.getElementById('regularUserNewsNotice');
+
+            // Show publish form for ALL logged-in users
+            if (publishForm) publishForm.classList.add('visible');
+            if (regularNotice) regularNotice.classList.remove('show');
+
+            if (isAdmin) {
+                document.getElementById('adminBadge').classList.add('show');
+                document.querySelectorAll('.admin-only').forEach(el => el.style.display = 'block');
+                document.getElementById('adminPanel').classList.add('visible');
+                document.getElementById('chartScrollHint') && (document.getElementById('chartScrollHint').innerHTML =
+                    '<i class="fas fa-unlock"></i> Admin: scroll & zoom enabled');
+            } else {
+                document.getElementById('adminBadge').classList.remove('show');
+                document.querySelectorAll('.admin-only').forEach(el => el.style.display = 'none');
+                document.getElementById('adminPanel').classList.remove('visible');
+            }
+
+            renderMyPayments();
+            renderPaymentHistory();
+            renderAdminUsers();
+            renderAdminPayments();
+            renderPlatformStats();
+            renderNews();
+            renderGallery();
+
+            if (typeof mainChart === 'undefined' || !mainChart) {
+                initTradingViewWidget();
+                updateRates();
+            }
+        }
+
+        function updateUIForLoggedOutUser() {
+            document.getElementById('stepContainer').style.display = 'block';
+            document.getElementById('userBar').classList.remove('show');
+            document.getElementById('dashboardGrid').classList.remove('show');
+            document.getElementById('adminBadge').classList.remove('show');
+            document.querySelectorAll('.admin-only').forEach(el => el.style.display = 'none');
+            document.getElementById('adminPanel').classList.remove('visible');
+            document.getElementById('newsPublishForm').classList.remove('visible');
+            document.getElementById('regularUserNewsNotice').classList.add('show');
+            goToStep(3);
+        }
+
+        function saveUser(user) {
+            localStorage.setItem('yandex_rim_user', JSON.stringify(user));
+            currentUser = user;
+            saveUsers();
+        }
+
+        function loadUser() {
+            const saved = localStorage.getItem('yandex_rim_user');
+            if (saved) {
+                currentUser = JSON.parse(saved);
+                const validUser = users.find(u => u.id === currentUser.id);
+                if (validUser) {
+                    currentUser = validUser;
+                    updateUIForLoggedInUser();
+                } else {
+                    currentUser = null;
+                    localStorage.removeItem('yandex_rim_user');
+                    updateUIForLoggedOutUser();
+                }
+            } else {
+                updateUIForLoggedOutUser();
+            }
+            return currentUser;
+        }
+
+        // ============================================================
+        //  DATA PERSISTENCE
+        // ============================================================
+        function savePayments() { localStorage.setItem('yandex_rim_payments', JSON.stringify(payments)); }
+
+        function savePhotos() { localStorage.setItem('yandex_rim_photos', JSON.stringify(photos)); }
+
+        function saveNews() { localStorage.setItem('yandex_rim_news', JSON.stringify(news)); }
+
+        function saveUsers() { localStorage.setItem('yandex_rim_users', JSON.stringify(users)); }
+
+        function loadAllData() {
+            const savedPayments = localStorage.getItem('yandex_rim_payments');
+            if (savedPayments) payments = JSON.parse(savedPayments);
+            const savedPhotos = localStorage.getItem('yandex_rim_photos');
+            if (savedPhotos) photos = JSON.parse(savedPhotos);
+            const savedNews = localStorage.getItem('yandex_rim_news');
+            if (savedNews) news = JSON.parse(savedNews);
+            const savedUsers = localStorage.getItem('yandex_rim_users');
+            if (savedUsers) users = JSON.parse(savedUsers);
+
+            // Add some default news if empty
+            if (news.length === 0) {
+                news = [{
+                    id: Date.now(),
+                    title_en: "🚀 Welcome to Yandex Rim!",
+                    title_fr: "🚀 Bienvenue sur Yandex Rim !",
+                    title_ar: "🚀 مرحبًا بك في ياندكس ريم!",
+                    category: "Announcement",
+                    content_en: "Start transferring money instantly with our secure platform.",
+                    content_fr: "Commencez à transférer de l'argent instantanément avec notre plateforme sécurisée.",
+                    content_ar: "ابدأ في تحويل الأموال فورًا مع منصتنا الآمنة.",
+                    timestamp: Date.now(),
+                    author: "Admin"
+                }];
+                saveNews();
+            }
+        }
+
+        // ============================================================
+        //  RENDER FUNCTIONS
+        // ============================================================
+        function getLocalizedText(item, field, lang) {
+            if (!item) return '';
+            if (item[`${field}_${lang}`]) return item[`${field}_${lang}`];
+            if (item[field]) return item[field];
+            return '';
+        }
+
+        function renderMyPayments() {
+            const container = document.getElementById('myPaymentsList');
+            const t = translations[currentLang];
+            if (!currentUser) {
+                container.innerHTML =
+                    `<div style="text-align:center;padding:20px;color:#95a5a6;"><i class="fas fa-lock"></i> Please login to see your payments</div>`;
+                return;
+            }
+            const userPayments = payments.filter(p => p.userId === currentUser.id);
+            if (userPayments.length === 0) {
+                container.innerHTML =
+                    `<div style="text-align:center;padding:20px;color:#95a5a6;"><i class="fas fa-inbox"></i> ${t.noPaymentsText}</div>`;
+                return;
+            }
+            container.innerHTML = userPayments.slice(0, 20).map(p => {
+                const statusText = t[p.status] || p.status.toUpperCase();
+                const statusClass = p.status || 'pending';
+                return `
+                        <div class="payment-item status-${statusClass}">
+                            <div>
+                                <strong>${p.id}</strong>
+                                <div class="payment-meta">${p.amount} ${p.currency} | Fee: ${p.fee}% | ${t.youReceive}: ${p.netAmount?.toFixed(2)} ${p.currency === 'RUB' ? 'MRU' : 'RUB'}</div>
+                                <div class="payment-meta">👤 ${p.recipient?.firstName || 'N/A'} ${p.recipient?.familyName || ''}</div>
+                                <div class="payment-meta">📞 ${p.recipient?.phone || 'N/A'} | 🏦 ${p.recipient?.bank || 'N/A'}</div>
+                                <div class="payment-meta">📅 ${new Date(p.timestamp).toLocaleString()}</div>
+                            </div>
+                            <div>
+                                <span class="my-payment-status ${statusClass}">${statusText}</span>
+                                <button class="delete-icon-btn" onclick="deletePayment('${p.id}')" title="${t.deletePayment}"><i class="fas fa-trash"></i></button>
+                            </div>
+                        </div>
+                    `;
+            }).join('');
+        }
+
+        function renderPaymentHistory() {
+            const container = document.getElementById('paymentHistory');
+            const t = translations[currentLang];
+            if (!currentUser || !(currentUser.isAdmin || currentUser.email === ADMIN_EMAIL)) {
+                container.innerHTML = '';
+                return;
+            }
+            if (payments.length === 0) {
+                container.innerHTML = `<div style="padding:12px;color:#95a5a6;">${t.noPaymentHistory}</div>`;
+                return;
+            }
+            container.innerHTML = payments.map(p => `
+                    <div class="payment-item" style="flex-direction:column;align-items:flex-start;">
+                        <div style="display:flex;justify-content:space-between;width:100%;flex-wrap:wrap;gap:6px;">
+                            <strong>${p.id}</strong>
+                            <div>
+                                <span class="payment-status status-${p.status}">${t[p.status] || p.status.toUpperCase()}</span>
+                                <button class="delete-icon-btn" onclick="deletePayment('${p.id}')" title="${t.deletePayment}"><i class="fas fa-trash"></i></button>
+                            </div>
+                        </div>
+                        <div class="payment-meta">User: ${p.userId} | Amount: ${p.amount} ${p.currency} | Fee: ${p.fee}% | ${t.youReceive}: ${p.netAmount?.toFixed(2)} ${p.currency === 'RUB' ? 'MRU' : 'RUB'}</div>
+                        ${p.recipient ? `<div class="payment-meta">👤 ${p.recipient.firstName} ${p.recipient.familyName} | 📞 ${p.recipient.phone}</div>` : ''}
+                        <div class="payment-meta">📅 ${new Date(p.timestamp).toLocaleString()}</div>
+                    </div>
+                `).join('');
+        }
+
+        function renderGallery() {
+            const container = document.getElementById('photoGallery');
+            const t = translations[currentLang];
+            const isAdmin = currentUser && (currentUser.isAdmin || currentUser.email === ADMIN_EMAIL);
+
+            let visiblePhotos = photos;
+            if (!isAdmin && currentUser) {
+                visiblePhotos = photos.filter(p => p.userId === currentUser.id);
+            }
+
+            if (visiblePhotos.length === 0) {
+                container.innerHTML = `<div style="text-align:center;padding:24px;color:#95a5a6;">${t.noReceipts}</div>`;
+                return;
+            }
+
+            container.innerHTML = visiblePhotos.map((p, i) => {
+                const actions = isAdmin ? `
+                            <button class="validate-btn" onclick="setPhotoStatus('${p.id}','validated')">✓ ${t.approved}</button>
+                            <button class="reject-btn" onclick="setPhotoStatus('${p.id}','rejected')">✗ ${t.rejected}</button>
+                            <button class="delete-btn" onclick="deletePhoto('${p.id}')"><i class="fas fa-trash"></i></button>
+                            <button class="admin-action-btn" onclick="openPhotoZoom('${p.src}','${p.caption || 'Receipt'}')"><i class="fas fa-search-plus"></i> Zoom</button>
+                        ` :
+                    `<span style="font-size:0.6rem;color:#95a5a6;"><i class="fas fa-lock"></i> Admin only</span>
+                             <button class="delete-btn" onclick="deletePhoto('${p.id}')"><i class="fas fa-trash"></i></button>`;
+                return `
+                            <div class="gallery-item ${p.status || ''}">
+                                <img src="${p.src}" alt="Receipt" onclick="${isAdmin ? `openPhotoZoom('${p.src}','${p.caption || 'Receipt'}')` : ''}">
+                                <div class="caption">${p.caption || 'Receipt'}<br><small>${p.type === 'upload' ? '📁 Uploaded' : '🔗 URL'}</small></div>
+                                <div class="gallery-actions">${actions}</div>
+                            </div>
+                        `;
+            }).join('');
+        }
+
+        function renderNews() {
+            const container = document.getElementById('newsFeed');
+            const t = translations[currentLang];
+            const isAdmin = currentUser && (currentUser.isAdmin || currentUser.email === ADMIN_EMAIL);
+
+            if (!news || news.length === 0) {
+                container.innerHTML =
+                    `<div style="text-align:center;padding:30px;color:#95a5a6;"><i class="fas fa-newspaper" style="font-size:2rem;display:block;margin-bottom:10px;"></i>${t.noNews}</div>`;
+                return;
+            }
+
+            const catColors = { Exchange: 'exchange', Economy: 'economy', Announcement: 'announcement', Security: 'security' };
+            const catIcons = { Exchange: '📊', Economy: '📈', Announcement: '📢', Security: '🔒' };
+
+            container.innerHTML = news.slice(0, 20).map((n, idx) => {
+                const cat = n.category || 'Announcement';
+                const cls = catColors[cat] || 'announcement';
+                const icon = catIcons[cat] || '📢';
+                const author = n.author || 'Admin';
+                const isAuthor = currentUser && n.author === currentUser.email;
+                return `
+                            <div class="news-card ${cls}" style="animation:fadeInUp 0.3s ease ${Math.min(idx*0.05,0.4)}s both;">
+                                <div class="news-title"><span class="news-icon">${icon}</span> ${getLocalizedText(n, 'title', currentLang)}</div>
+                                <div class="news-meta">
+                                    <span class="category">${cat}</span>
+                                    <span><i class="far fa-clock"></i> ${new Date(n.timestamp).toLocaleString()}</span>
+                                    <span><i class="fas fa-user"></i> ${author}</span>
+                                </div>
+                                <div class="news-content">${getLocalizedText(n, 'content', currentLang)}</div>
+                                <div class="news-actions">
+                                    ${isAdmin ? `
+                                        <button class="btn-approve" onclick="approveNews('${n.id}')"><i class="fas fa-check"></i> Approve</button>
+                                        <button class="btn-reject" onclick="rejectNews('${n.id}')"><i class="fas fa-times"></i> Reject</button>
+                                        <button class="btn-delete" onclick="deleteNews('${n.id}')"><i class="fas fa-trash"></i> ${t.deleteNewsBtn}</button>
+                                    ` : ''}
+                                    ${!isAdmin && isAuthor ? `
+                                        <button class="btn-delete" onclick="deleteNews('${n.id}')"><i class="fas fa-trash"></i> ${t.deleteNewsBtn}</button>
+                                    ` : ''}
+                                </div>
+                            </div>
+                        `;
+            }).join('');
+
+            if (!document.getElementById('newsAnimations')) {
+                const style = document.createElement('style');
+                style.id = 'newsAnimations';
+                style.textContent =
+                    `@keyframes fadeInUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}`;
+                document.head.appendChild(style);
+            }
+        }
+
+        function renderAdminUsers() {
+            const container = document.getElementById('userReviewList');
+            const count = document.getElementById('userCount');
+            const t = translations[currentLang];
+            count.textContent = users.length;
+            if (users.length === 0) { container.innerHTML = `<div style="padding:8px;color:#95a5a6;">${t.noUsers}</div>`; return; }
+            container.innerHTML = users.map(u => `
+                        <div style="display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid #eef2fa;">
+                            <div><strong>${u.email}</strong> <span style="font-size:0.7rem;color:#7f8c8d;">| ${u.country}</span></div>
+                            <button class="admin-action-btn danger" onclick="deleteUser('${u.id}')" style="padding:2px 12px;font-size:0.7rem;"><i class="fas fa-trash"></i></button>
+                        </div>
+                    `).join('');
+        }
+
+        function renderAdminPayments() {
+            const container = document.getElementById('adminPaymentReview');
+            const t = translations[currentLang];
+            const pending = payments.filter(p => p.status === 'pending');
+            if (pending.length === 0) { container.innerHTML =
+                    `<div style="padding:8px;color:#95a5a6;">${t.noPendingPayments}</div>`; return; }
+            container.innerHTML = pending.map(p => `
+                        <div class="admin-box" style="margin-top:8px;">
+                            <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:6px;">
+                                <div><strong>${p.id}</strong> <span class="payment-status status-pending">${t.pending}</span></div>
+                                <button class="delete-icon-btn" onclick="deletePayment('${p.id}')" title="${t.deletePayment}"><i class="fas fa-trash"></i></button>
+                            </div>
+                            <div class="payment-meta">User: ${p.userId} | ${p.amount} ${p.currency} | Fee: ${p.fee}% | ${t.youReceive}: ${p.netAmount?.toFixed(2)} ${p.currency === 'RUB' ? 'MRU' : 'RUB'}</div>
+                            ${p.recipient ? `<div class="payment-meta">👤 ${p.recipient.firstName} ${p.recipient.familyName} | 📞 ${p.recipient.phone} | 🏦 ${p.recipient.bank || 'N/A'}</div>` : ''}
+                            <div style="margin-top:8px;">
+                                <button class="validate-btn" onclick="approvePayment('${p.id}')">✓ ${t.approved}</button>
+                                <button class="reject-btn" onclick="rejectPayment('${p.id}')">✗ ${t.rejected}</button>
+                            </div>
+                        </div>
+                    `).join('');
+        }
+
+        function renderPlatformStats() {
+            const container = document.getElementById('platformStats');
+            const totalUsers = users.length;
+            const totalPayments = payments.length;
+            const approved = payments.filter(p => p.status === 'approved').length;
+            const volume = payments.filter(p => p.status === 'approved').reduce((s, p) => s + p.amount, 0);
+            container.innerHTML = `
+                        <div class="admin-box" style="flex:1;text-align:center;padding:12px;"><h3>${totalUsers}</h3><p>Users</p></div>
+                        <div class="admin-box" style="flex:1;text-align:center;padding:12px;"><h3>${totalPayments}</h3><p>Payments</p></div>
+                        <div class="admin-box" style="flex:1;text-align:center;padding:12px;"><h3>${approved}</h3><p>Approved</p></div>
+                        <div class="admin-box" style="flex:1;text-align:center;padding:12px;"><h3>${volume.toLocaleString()}</h3><p>Volume (RUB)</p></div>
+                    `;
+        }
+
+        // ============================================================
+        //  DELETE PAYMENT FUNCTION
+        // ============================================================
+        function deletePayment(paymentId) {
+            const t = translations[currentLang];
+            if (!confirm(t.deleteConfirm)) return;
+            payments = payments.filter(p => p.id !== paymentId);
+            savePayments();
+            renderMyPayments();
+            renderPaymentHistory();
+            renderAdminPayments();
+            renderPlatformStats();
+            showToast(t.paymentDeleted, '#2ecc71');
+        }
+
+        // ============================================================
+        //  NEWS ACTIONS
+        // ============================================================
+        function approveNews(id) {
+            const t = translations[currentLang];
+            const item = news.find(n => n.id === id);
+            if (item) showToast(t.newsApproved, '#2ecc71');
+        }
+
+        function rejectNews(id) {
+            const t = translations[currentLang];
+            const item = news.find(n => n.id === id);
+            if (item) showToast(t.newsRejected, '#e74c3c');
+        }
+
+        function deleteNews(id) {
+            const t = translations[currentLang];
+            if (!confirm(t.deleteNewsConfirm)) return;
+            news = news.filter(n => n.id !== id);
+            saveNews();
+            renderNews();
+            showToast(t.newsDeleted, '#95a5a6');
+        }
+
+        document.getElementById('publishNewsBtn').addEventListener('click', function() {
+            if (!currentUser) {
+                showToast('Please login to publish news', '#e74c3c');
+                return;
+            }
+            const title = document.getElementById('newsTitle').value.trim();
+            const category = document.getElementById('newsCategory').value;
+            const content = document.getElementById('newsContent').value.trim();
+            if (!title || !content) return showToast('Fill all fields', '#e74c3c');
+
+            // Save in all languages
+            news.unshift({
+                id: Date.now() + '_' + Math.random().toString(36).slice(2, 6),
+                title_en: title,
+                title_fr: title,
+                title_ar: title,
+                category: category,
+                content_en: content,
+                content_fr: content,
+                content_ar: content,
+                timestamp: Date.now(),
+                author: currentUser.email
+            });
+            if (news.length > 50) news.pop();
+            saveNews();
+            document.getElementById('newsTitle').value = '';
+            document.getElementById('newsContent').value = '';
+            renderNews();
+            showToast('📰 News published by ' + currentUser.email + '!', '#2ecc71');
+        });
+
+        function approvePayment(id) {
+            const p = payments.find(p => p.id === id);
+            if (p) { p.status = 'approved';
+                savePayments();
+                renderMyPayments();
+                renderPaymentHistory();
+                renderAdminPayments();
+                renderPlatformStats();
+                showToast(`Payment ${id} approved`, '#2ecc71'); }
+        }
+
+        function rejectPayment(id) {
+            const p = payments.find(p => p.id === id);
+            if (p) { p.status = 'rejected';
+                savePayments();
+                renderMyPayments();
+                renderPaymentHistory();
+                renderAdminPayments();
+                renderPlatformStats();
+                showToast(`Payment ${id} rejected`, '#e74c3c'); }
+        }
+
+        function setPhotoStatus(photoId, status) {
+            const p = photos.find(photo => photo.id === photoId);
+            if (p) {
+                p.status = status;
+                savePhotos();
+                renderGallery();
+                showToast(`Receipt ${status}`, status === 'validated' ? '#2ecc71' : '#e74c3c');
+            }
+        }
+
+        function deletePhoto(photoId) {
+            if (!confirm('Delete this receipt?')) return;
+            photos = photos.filter(p => p.id !== photoId);
+            savePhotos();
+            renderGallery();
+            showToast('Receipt deleted', '#95a5a6');
+        }
+
+        function deleteUser(id) {
+            if (!confirm('Delete this user and all their payments?')) return;
+            users = users.filter(u => u.id !== id);
+            payments = payments.filter(p => p.userId !== id);
+            saveUsers();
+            savePayments();
+            renderAdminUsers();
+            renderAdminPayments();
+            renderPlatformStats();
+            renderMyPayments();
+            renderPaymentHistory();
+            showToast('User deleted', '#e74c3c');
+            if (currentUser && currentUser.id === id) {
+                document.getElementById('logoutBtn').click();
+            }
+        }
+
+        document.getElementById('exportUsersBtn').addEventListener('click', function() {
+            const data = users.map(u => ({ email: u.email, country: u.country, registeredAt: new Date(u.registeredAt)
+                    .toLocaleString() }));
+            const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+            const a = document.createElement('a');
+            a.href = URL.createObjectURL(blob);
+            a.download = `yandexrim_users_${new Date().toISOString().slice(0,10)}.json`;
+            a.click();
+            showToast('Users exported!', '#2ecc71');
+        });
+
+        document.getElementById('clearAllUsersBtn').addEventListener('click', function() {
+            if (!confirm('⚠️ Delete ALL users and data? This cannot be undone!')) return;
+            users = [];
+            payments = [];
+            photos = [];
+            saveUsers();
+            savePayments();
+            savePhotos();
+            renderAdminUsers();
+            renderAdminPayments();
+            renderGallery();
+            renderPlatformStats();
+            renderMyPayments();
+            renderPaymentHistory();
+            showToast('All data cleared', '#e74c3c');
+            if (currentUser) {
+                document.getElementById('logoutBtn').click();
+            }
+        });
+
+        // ============================================================
+        //  PAYMENT SUBMISSION
+        // ============================================================
+        function submitPayment(currency, amount, feePercent, netAmount, recipientData) {
+            if (!currentUser) { showToast('Please login first!', '#e74c3c'); return; }
+            if (!recipientData.firstName || !recipientData.familyName || !recipientData.phone) {
+                showToast('Please fill in all recipient information', '#e74c3c');
+                return;
+            }
+            if (currency === 'RUB' && !recipientData.phone.startsWith('+222')) {
+                showToast('Phone must start with +222 (Mauritania)', '#e74c3c');
+                return;
+            }
+            if (currency !== 'RUB' && !recipientData.phone.startsWith('+7')) {
+                showToast('Phone must start with +7 (Russia)', '#e74c3c');
+                return;
+            }
+
+            const id = `PAY-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`;
+            const paymentNumber = currency === 'RUB' ? '+7 900 148 43 51' : '+222 46 11 81 33';
+            const t = translations[currentLang];
+            const bankInstruction = currency === 'RUB' ? t.modalInstructionRub : t.modalInstructionMru;
+
+            payments.unshift({
+                id,
+                userId: currentUser.id,
+                amount,
+                currency,
+                fee: feePercent,
+                netAmount,
+                status: 'pending',
+                timestamp: Date.now(),
+                recipient: recipientData
+            });
+            savePayments();
+            renderMyPayments();
+            renderPaymentHistory();
+            renderAdminPayments();
+            renderPlatformStats();
+            showToast(`Payment submitted! ID: ${id}`, '#2ecc71');
+            showModal(paymentNumber, bankInstruction);
+        }
+
+        document.getElementById('submitPaymentRub').addEventListener('click', function() {
+            const amount = parseFloat(document.getElementById('amountRub').value || 0);
+            const fee = parseFloat(document.getElementById('feePercentRub').value || 15);
+            const rubToMru = liveRubUsd * liveUsdMru;
+            const netAmount = (amount - amount * fee / 100) * rubToMru;
+            submitPayment('RUB', amount, fee, netAmount, {
+                firstName: document.getElementById('firstName').value.trim(),
+                familyName: document.getElementById('familyName').value.trim(),
+                phone: document.getElementById('recipientPhone').value.trim(),
+                bank: document.getElementById('recipientBank').value.trim()
+            });
+        });
+
+        document.getElementById('submitPaymentMru').addEventListener('click', function() {
+            const amount = parseFloat(document.getElementById('amountMru').value || 0);
+            const fee = parseFloat(document.getElementById('feePercentMru').value || 15);
+            const rubToMru = liveRubUsd * liveUsdMru;
+            const mruToRub = 1 / rubToMru;
+            const netAmount = (amount - amount * fee / 100) * mruToRub;
+            submitPayment('MRU', amount, fee, netAmount, {
+                firstName: document.getElementById('firstNameMru').value.trim(),
+                familyName: document.getElementById('familyNameMru').value.trim(),
+                phone: document.getElementById('recipientPhoneMru').value.trim(),
+                bank: document.getElementById('recipientBankMru').value.trim()
+            });
+        });
+
+        // ============================================================
+        //  RECEIPTS UPLOAD
+        // ============================================================
+        document.getElementById('uploadPhotoBtnUrl').addEventListener('click', function() {
+            if (!currentUser) { showToast('Please login first!', '#e74c3c'); return; }
+            const src = prompt('Enter image URL:');
+            if (!src) return;
+            const caption = prompt('Description:', 'Payment proof');
+            photos.unshift({
+                id: 'photo_' + Date.now() + '_' + Math.random().toString(36).slice(2, 6),
+                userId: currentUser.id,
+                src,
+                caption: caption || 'Receipt',
+                status: '',
+                type: 'url',
+                timestamp: Date.now()
+            });
+            savePhotos();
+            renderGallery();
+            showToast('Receipt added!', '#2ecc71');
+        });
+
+        document.getElementById('fileUploadInput').addEventListener('change', function(e) {
+            if (!currentUser) { showToast('Please login first!', '#e74c3c'); return; }
+            if (!e.target.files[0]) return;
+            const file = e.target.files[0];
+            if (file.size > 5 * 1024 * 1024) { showToast('File too large! Max 5MB.', '#e74c3c'); return; }
+            if (!file.type.startsWith('image/')) { showToast('Please upload an image.', '#e74c3c'); return; }
+            const reader = new FileReader();
+            reader.onload = function(ev) {
+                const caption = prompt('Description:', file.name);
+                photos.unshift({
+                    id: 'photo_' + Date.now() + '_' + Math.random().toString(36).slice(2, 6),
+                    userId: currentUser.id,
+                    src: ev.target.result,
+                    caption: caption || file.name,
+                    status: '',
+                    type: 'upload',
+                    filename: file.name,
+                    timestamp: Date.now()
+                });
+                savePhotos();
+                renderGallery();
+                showToast('Receipt uploaded!', '#2ecc71');
+            };
+            reader.readAsDataURL(file);
+            e.target.value = '';
+        });
+
+        // ============================================================
+        //  MODALS
+        // ============================================================
+        function showModal(paymentNumber, bankInstruction) {
+            document.getElementById('paymentNumber').textContent = paymentNumber;
+            document.getElementById('bankInstruction').innerHTML = bankInstruction;
+            document.getElementById('successModal').classList.add('show');
+        }
+
+        function closeModal() {
+            document.getElementById('successModal').classList.remove('show');
+        }
+
+        function openPhotoZoom(src, caption) {
+            document.getElementById('zoomImage').src = src;
+            document.getElementById('zoomCaption').textContent = caption || 'Receipt';
+            document.getElementById('photoZoomModal').classList.add('show');
+        }
+
+        function closePhotoZoom() {
+            document.getElementById('photoZoomModal').classList.remove('show');
+        }
+
+        // ============================================================
+        //  TOAST
+        // ============================================================
+        function showToast(msg, color = '#1a2c3e') {
+            const existing = document.querySelector('.toast');
+            if (existing) existing.remove();
+            const toast = document.createElement('div');
+            toast.className = 'toast';
+            toast.style.background = color;
+            toast.innerHTML = `<i class="fas fa-info-circle"></i> ${msg}`;
+            document.body.appendChild(toast);
+            setTimeout(() => toast.remove(), 3500);
+        }
+
+        // ============================================================
+        //  CHART & RATES
+        // ============================================================
+        let liveUsdMru = 37.5;
+        let liveRubUsd = 0.011;
+
+        async function fetchRealUSDRUB() {
+            try {
+                const res = await fetch('https://api.exchangerate-api.com/v4/latest/USD');
+                const data = await res.json();
+                const rate = data.rates.RUB;
+                if (rate && rate > 0) {
+                    document.getElementById('usdRubRate').innerHTML = `1 USD = ${rate.toFixed(2)} RUB`;
+                    document.getElementById('usdRubUpdate').innerHTML = `Updated: ${new Date().toLocaleTimeString()}`;
+                    return rate;
+                }
+                throw new Error();
+            } catch (e) { return 72.64; }
+        }
+
+        async function fetchRealUSDtoMRU() {
+            try {
+                const res = await fetch('https://api.exchangerate-api.com/v4/latest/USD');
+                const data = await res.json();
+                const rate = data.rates.MRU;
+                if (rate && rate > 0) return rate;
+                throw new Error();
+            } catch (e) { return 37.5; }
+        }
+
+        async function updateRates() {
+            const usdRub = await fetchRealUSDRUB();
+            liveUsdMru = await fetchRealUSDtoMRU();
+            liveRubUsd = 1 / usdRub;
+            updateCalc();
+            updateRateDisplay();
+            updateFeeAlert();
+        }
+
+        function updateRateDisplay() {
+            const rubToMru = liveRubUsd * liveUsdMru;
+            const mruToRub = 1 / rubToMru;
+            document.getElementById('liveRateDisplay').textContent = liveUsdMru.toFixed(2);
+            document.getElementById('rubToMruDetail').textContent = rubToMru.toFixed(4);
+            document.getElementById('mruToRubDetail').textContent = mruToRub.toFixed(4);
+            document.getElementById('updateTimestamp').textContent = `Updated: ${new Date().toLocaleTimeString()}`;
+        }
+
+        function updateCalc() {
+            const rubToMru = liveRubUsd * liveUsdMru;
+            const mruToRub = 1 / rubToMru;
+
+            const amountRub = parseFloat(document.getElementById('amountRub')?.value || 0);
+            const amountMru = parseFloat(document.getElementById('amountMru')?.value || 0);
+
+            const feeRub = parseFloat(document.getElementById('feePercentRub')?.value || 15) / 100;
+            const feeMru = parseFloat(document.getElementById('feePercentMru')?.value || 15) / 100;
+
+            const feeAmountRub = amountRub * feeRub;
+            const netMru = (amountRub * rubToMru) - (feeAmountRub * rubToMru);
+
+            const feeAmountMru = amountMru * feeMru;
+            const netRub = (amountMru * mruToRub) - (feeAmountMru * mruToRub);
+
+            if (document.getElementById('convertedMru')) {
+                document.getElementById('convertedMru').value = `${netMru.toFixed(2)} MRU`;
+                document.getElementById('totalFeeRub').value = `${feeAmountRub.toFixed(2)} RUB`;
+                document.getElementById('rubResultDisplay').innerHTML =
+                    `💱 Fee: ${(feeRub*100).toFixed(0)}% (${feeAmountRub.toFixed(2)} RUB) | You receive: ${netMru.toFixed(2)} MRU`;
+            }
+            if (document.getElementById('convertedRub')) {
+                document.getElementById('convertedRub').value = `${netRub.toFixed(2)} RUB`;
+                document.getElementById('totalFeeMru').value = `${feeAmountMru.toFixed(2)} MRU`;
+                document.getElementById('mruResultDisplay').innerHTML =
+                    `💱 Fee: ${(feeMru*100).toFixed(0)}% (${feeAmountMru.toFixed(2)} MRU) | You receive: ${netRub.toFixed(2)} RUB`;
+            }
+
+            window._feeAmountRub = feeAmountRub;
+            window._netMru = netMru;
+            window._feeAmountMru = feeAmountMru;
+            window._netRub = netRub;
+        }
+
+        function updateFeeAlert() {
+            const t = translations[currentLang];
+            const dir = document.querySelector('.dir-btn.active')?.dataset.dir || 'rub2mru';
+            if (dir === 'rub2mru') {
+                const el = document.getElementById('feeAlertText');
+                if (el) el.innerHTML =
+                    `${t.feeAlertPrefix}${(window._feeAmountRub || 0).toFixed(2)} RUB ${t.feeAlertMiddle}${(window._netMru || 0).toFixed(2)} MRU`;
+            } else {
+                const el = document.getElementById('feeAlertTextMru');
+                if (el) el.innerHTML =
+                    `${t.feeAlertPrefix}${(window._feeAmountMru || 0).toFixed(2)} MRU ${t.feeAlertMiddle}${(window._netRub || 0).toFixed(2)} RUB`;
+            }
+        }
+
+        function initTradingViewWidget() {
+            if (typeof TradingView === 'undefined') { setTimeout(initTradingViewWidget, 500); return; }
+            new TradingView.widget({
+                width: '100%',
+                height: 380,
+                symbol: 'FX_IDC:USDRUB',
+                interval: '60',
+                timezone: 'Europe/Moscow',
+                theme: 'light',
+                style: '1',
+                locale: currentLang === 'ar' ? 'ar' : (currentLang === 'fr' ? 'fr' : 'en'),
+                toolbar_bg: '#f1f3f6',
+                enable_publishing: false,
+                hide_top_toolbar: false,
+                hide_legend: false,
+                save_image: false,
+                container_id: 'tradingview_chart',
+                studies: ['MASimple@tv-basicstudies', 'RSI@tv-basicstudies']
+            });
+
+            setTimeout(() => {
+                const container = document.getElementById('tradingview_chart');
+                const isAdmin = currentUser && (currentUser.isAdmin || currentUser.email === ADMIN_EMAIL);
+                if (container) {
+                    const overlay = document.getElementById('chartBlockOverlay');
+                    if (!isAdmin && !overlay) {
+                        const div = document.createElement('div');
+                        div.id = 'chartBlockOverlay';
+                        div.style.cssText =
+                            'position:absolute;top:0;left:0;width:100%;height:100%;z-index:5;cursor:default;pointer-events:all;';
+                        container.style.position = 'relative';
+                        container.appendChild(div);
+                    } else if (isAdmin && overlay) {
+                        overlay.remove();
+                    }
+                }
+            }, 3000);
+        }
+
+        // ============================================================
+        //  DIRECTION SWITCH
+        // ============================================================
+        document.querySelectorAll('.dir-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.dir-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                const dir = this.dataset.dir;
+                document.getElementById('rubToMruPanel').style.display = dir === 'rub2mru' ? 'block' : 'none';
+                document.getElementById('mruToRubPanel').style.display = dir === 'mru2rub' ? 'block' : 'none';
+                setTimeout(updateFeeAlert, 100);
+            });
+        });
+
+        document.getElementById('amountRub')?.addEventListener('input', updateCalc);
+        document.getElementById('amountMru')?.addEventListener('input', updateCalc);
+        document.getElementById('feePercentRub')?.addEventListener('change', updateCalc);
+        document.getElementById('feePercentMru')?.addEventListener('change', updateCalc);
+
+        // ============================================================
+        //  INIT
+        // ============================================================
+        function checkAdminAutoLogin() {
+            if (!users.some(u => u.email === ADMIN_EMAIL)) {
+                users.push({
+                    id: 'admin_' + Date.now(),
+                    email: ADMIN_EMAIL,
+                    password: btoa(ADMIN_PASSWORD),
+                    country: 'Admin',
+                    registeredAt: Date.now(),
+                    status: 'active',
+                    isAdmin: true,
+                    emailVerified: true
+                });
+                saveUsers();
+            }
+        }
+
+        window.approveNews = approveNews;
+        window.rejectNews = rejectNews;
+        window.deleteNews = deleteNews;
+        window.approvePayment = approvePayment;
+        window.rejectPayment = rejectPayment;
+        window.setPhotoStatus = setPhotoStatus;
+        window.deletePhoto = deletePhoto;
+        window.openPhotoZoom = openPhotoZoom;
+        window.closePhotoZoom = closePhotoZoom;
+        window.closeModal = closeModal;
+        window.deleteUser = deleteUser;
+        window.deletePayment = deletePayment;
+
+        async function init() {
+            loadAllData();
+            checkAdminAutoLogin();
+            loadUser();
+            renderNews();
+            renderGallery();
+            renderMyPayments();
+            renderPaymentHistory();
+            updateLanguage('en');
+
+            if (currentUser) {
+                initTradingViewWidget();
+                await updateRates();
+                setInterval(updateRates, 30000);
+            }
+
+            showToast('⚡ Welcome to Yandex Rim! All users can publish market news.', '#2ecc71');
+        }
+
+        init();
+    </script>
+
+</body>
+</html>
